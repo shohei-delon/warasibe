@@ -7,6 +7,7 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/index.css" >
 </head>
 <body>
 
@@ -15,70 +16,75 @@
 
 		<div class="searchContainer">
 			<s:form action="TextSearchAction" theme="simple">
-				<input type="search" name="searchText" class="seachText">
+				<input type="search" name="searchText" class="searchText">
 				<s:submit value=" " class="textSearchSubmit"/>
 			</s:form>
 		</div>
 
 		<div class="headerRightContainer">
-			<a></a>
-			<a></a>
-			<a></a>
+			<s:if test="#session.id == null">
+				<a href='<s:url action="MoveLoginAction"/>'>ログイン</a>
+			</s:if>
+			<s:else>
+				<a href='<s:url action="MoveMypageAction"/>'>マイページ</a>
+				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+			</s:else>
 		</div>
 	</header>
 
-	<div id="leftSideBar">
-		<h3>カテゴリ検索</h3>
-
-	</div>
-
 	<div id="main">
-		<h2>firstTopic</h2>
-		<ul class="firstTopicList">
-			<li class="topicItem">
-				<a>
-					<img alt="userImage" src="" class="userImage">
+		<div id="leftSideBar">
+			<h3>カテゴリ検索</h3>
+
+		</div>
+
+		<div id="centerBar">
+			<h2>firstTopic</h2>
+			<ul class="firstTopicList">
+				<li class="topicItem">
+					<a>
+						<img alt="userImage" src="" class="userImage">
+						<span class="userProfile">よろしく</span>
+					</a>
+				</li>
+			</ul>
+
+			<h2>secondTopic</h2>
+			<ul class="secondTopicContainer">
+				<li class="topicItem">
+					<a>
+					<img alt="userImage" src="">
 					<span class="userProfile">よろしく</span>
-				</a>
-			</li>
-		</ul>
-
-		<h2>secondTopic</h2>
-		<ul class="secondTopicContainer">
-			<li class="topicItem">
-				<a>
-				<img alt="userImage" src="">
-				<span class="userProfile">よろしく</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-
-	<div id="rightSideBar">
-
-		<div class="loginContainer">
-			<s:form action="LoginAction">
-				<label>ログインID</label>
-				<input type="text" name="loginUserId">
-				<label>パスワード</label>
-				<input type="password" name="loginUserPassword">
-				<s:submit value="ログイン"/>
-			</s:form>
+					</a>
+				</li>
+			</ul>
 		</div>
 
-		<div class="signupContainer">
-			<s:form action="SignupAction">
-				<label>ログインID</label>
-				<input type="text" name="loginUserId">
-				<label>パスワード</label>
-				<input type="password" name="loginUserPassword">
-				<label>メールアドレス</label>
-				<input type="email" name="userEmail">
-				<s:submit value="新規登録"/>
-			</s:form>
+		<div id="rightSideBar">
+
+			<div class="loginContainer">
+				<s:form action="LoginAction" theme="simple">
+					<label>ログインID:</label><br>
+					<input type="text" name="loginUserId"><br>
+					<label>パスワード:</label><br>
+					<input type="password" name="loginUserPassword"><br>
+					<s:submit value="ログイン"/>
+				</s:form>
+			</div>
+
+			<div class="signupContainer">
+				<s:form action="SignupAction" theme="simple">
+					<label>ログインID:</label><br>
+					<input type="text" name="loginUserId"><br>
+					<label>パスワード:</label><br>
+					<input type="password" name="loginUserPassword"><br>
+					<label>メールアドレス:</label><br>
+					<input type="email" name="userEmail"><br>
+					<s:submit value="新規登録"/>
+				</s:form>
+
+			</div>
 		</div>
-
 	</div>
-
 </body>
 </html>

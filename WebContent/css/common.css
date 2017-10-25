@@ -3,6 +3,7 @@
 header{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	height: 70px;
 }
 
@@ -11,11 +12,17 @@ header .icon{
 }
 
 header .searchContainer{
-
+	border: 1px solid #333;
+	border-radius: 20px;
+	padding: 0 10px;
 }
 
 header .searchContainer .searchText{
 	display: inline-block;
+	height: 25px;
+	width: 200px;
+	border: none;
+	out-line: none;
 }
 
 header .searchContainer .textSearchSubmit{

@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#main{
+	display: flex;
+	justify-content: space-between;
+}
+
+#leftSideBar{
+	width: 300px;
+
+}
+
+#centerBar{
+	width: 800px;
+}
+
+#rightSideBar{
+	width: 300px;
+}
