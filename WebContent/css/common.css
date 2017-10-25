@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+header{
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
+}
+
+header .icon{
+	height: 70px;
+}
+
+header .searchContainer{
+
+}
+
+header .searchContainer .searchText{
+	display: inline-block;
+}
+
+header .searchContainer .textSearchSubmit{
+	background: url("../images/search.png") 100% 100% no-repeat;
+	background-size: contain;
+	border: none;
+}
+
+header .headerRightContainer{
+
+}
