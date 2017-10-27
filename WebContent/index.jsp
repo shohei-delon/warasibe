@@ -23,7 +23,7 @@
 
 		<div class="headerRightContainer">
 			<s:if test="#session.id == null">
-				<a href='<s:url action="MoveLoginAction"/>'>ログイン</a>
+				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
 				<a href='<s:url action="MoveMypageAction"/>'>マイページ</a>
@@ -58,32 +58,6 @@
 					</a>
 				</li>
 			</ul>
-		</div>
-
-		<div id="rightSideBar">
-
-			<div class="loginContainer">
-				<s:form action="LoginAction" theme="simple">
-					<label>ログインID:</label><br>
-					<input type="text" name="loginUserId"><br>
-					<label>パスワード:</label><br>
-					<input type="password" name="loginUserPassword"><br>
-					<s:submit value="ログイン"/>
-				</s:form>
-			</div>
-
-			<div class="signupContainer">
-				<s:form action="SignupAction" theme="simple">
-					<label>ログインID:</label><br>
-					<input type="text" name="loginUserId"><br>
-					<label>パスワード:</label><br>
-					<input type="password" name="loginUserPassword"><br>
-					<label>メールアドレス:</label><br>
-					<input type="email" name="userEmail"><br>
-					<s:submit value="新規登録"/>
-				</s:form>
-
-			</div>
 		</div>
 	</div>
 </body>
