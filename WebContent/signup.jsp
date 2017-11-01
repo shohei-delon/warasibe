@@ -6,10 +6,14 @@
 <head>
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/login_authentification.css" >
 </head>
 <body>
 	<header>
-		<img alt="warasibe" src="./images/logo.png" class="icon">
+		<a href="./index.jsp">
+			<img alt="warasibe" src="./images/logo.png" class="icon">
+		</a>
 
 		<div class="searchContainer">
 			<s:form action="TextSearchAction" theme="simple">

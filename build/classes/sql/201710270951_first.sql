@@ -38,20 +38,6 @@ id int not null primary key auto_increment,
 name varchar(255)
 );
 
-DROP TABLE if exists buy_info;
-CREATE TABLE buy_info(
-id int not null primary key auto_increment,
-user_id int,
-commodity_id int
-);
-
-DROP TABLE if exists belongs_info;
-CREATE TABLE belongs_info(
-id int not null primary key auto_increment,
-user_id int,
-commodity_id int
-);
-
 DROP TABLE if exists wish_list_info;
 CREATE TABLE wish_list_info(
 id int not null primary key auto_increment,

@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+#main{
+	display: flex;
+	justify-content: space-between;
+}
+
+#main .wishListContainer{
+	min-width: 250px;
+}
+
+#main .centerWraper{
+
+}
+
+#main .centerWraper .centerContainer{
+	display: flex;
+	flex-flow: row wrap;
+	min-width: 250px;
+}
+
+#main .centerWraper .centerContainer .archiveContainer{
+	width: 250px;
+}
+
+#main .centerWraper .centerContainer .recentTradeContainer{
+	width: 250px;
+}
+
+#main .belongsListContainer{
+	min-width: 250px;
+}

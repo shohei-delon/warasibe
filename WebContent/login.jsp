@@ -6,17 +6,29 @@
 <head>
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/login_authentification.css" >
 </head>
 <body>
-	<header id="header">
-		<div class="cmpName" ><a href='<s:url action="GoHomeAction"/>' class="releaseLink">AI.inc</a></div>
-		<div class="session">
-			<s:if test="#session.user_id != null">
-				<a href='<s:url action="MyPageAction" />' class="myPage">マイページ</a>
-				<a href='<s:url action="LogoutAction" />' class="logInOut" >ログアウト</a>
+	<header>
+		<a href="./index.jsp">
+			<img alt="warasibe" src="./images/logo.png" class="icon">
+		</a>
+
+		<div class="searchContainer">
+			<s:form action="TextSearchAction" theme="simple">
+				<input type="search" name="searchText" class="searchText">
+				<s:submit value=" " class="textSearchSubmit"/>
+			</s:form>
+		</div>
+
+		<div class="headerRightContainer">
+			<s:if test="#session.id == null">
+				<a href="./signup.jsp" class="signup" >新規登録</a>
 			</s:if>
 			<s:else>
-				<a href="./signup.jsp" class="signup" >新規登録</a>
+				<a href='<s:url action="MoveMypageAction"/>'>マイページ</a>
+				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 			</s:else>
 		</div>
 	</header>
@@ -25,10 +37,12 @@
 		<h3>サイト閲覧にはログインをお願いします。</h3>
 		<div class="loginContainer">
 			<s:form action="LoginAction" theme="simple">
-				<label>ログインID:</label><br>
-				<input type="text" name="loginUserId"><br>
-				<label>パスワード:</label><br>
-				<input type="password" name="loginPassword"><br>
+				<label for="loginUserId">ログインID
+					<input type="text" name="loginUserId" id="loginUserId">
+				</label>
+				<label for="loginPassword">パスワード
+					<input type="password" name="loginPassword" id="loginPassword">
+				</label>
 				<s:submit value="ログイン"/>
 			</s:form>
 		</div>

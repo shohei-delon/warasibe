@@ -7,10 +7,8 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/index.css" >
 </head>
 <body>
-
 	<header>
 		<a href="./index.jsp">
 			<img alt="warasibe" src="./images/logo.png" class="icon">
@@ -28,44 +26,33 @@
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
+				<a href='<s:url action="MypageAction"/>'>マイページ</a>
 				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 			</s:else>
 		</div>
 	</header>
 
 	<div id="main">
-		<div id="leftSideBar">
-			<h3>カテゴリ検索</h3>
-			<ul>
-				<s:iterator value="categoryList">
-					<li><s:property /></li>
-				</s:iterator>
-			</ul>
-
+		<div class="addBelongs">
+			<a href="<s:url value='AddBelongsAction'/>">追加</a>
 		</div>
-
-		<div id="centerBar">
-			<h2>firstTopic</h2>
-			<ul class="firstTopicList">
-				<li class="topicItem">
-					<a>
-						<img alt="userImage" src="" class="userImage">
-						<span class="userProfile">よろしく</span>
-					</a>
+		<ul>
+			<s:iterator value="belongsList">
+				<li>
+					<p class="belongsItemName">名前：<s:property value="getName()" /></p>
+					<p class="belongsItemCategory">カテゴリ：<s:property value="category" /></p>
+					<p class="belongsItemDetail">詳細：<s:property value="getDetail" /></p>
+					<p class="belongsItemSize">サイズ
+						<s:property value="getHeight()" />×
+						<s:property value="getWidth()" />×
+						<s:property value="getDepth" />
+						<s:property value="getSize_unit()" />
+					</p>
+					<p class="belongsItemPrice">値段<s:property value="getPrice()" /></p>
 				</li>
-			</ul>
-
-			<h2>secondTopic</h2>
-			<ul class="secondTopicContainer">
-				<li class="topicItem">
-					<a>
-					<img alt="userImage" src="">
-					<span class="userProfile">よろしく</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+			</s:iterator>
+		</ul>
 	</div>
+
 </body>
 </html>
