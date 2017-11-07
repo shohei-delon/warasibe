@@ -7,37 +7,82 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.BelongsDAO;
-import com.internousdev.Warasibe.dto.BelongsItemDTO;
+import com.internousdev.Warasibe.dao.OtherAccountDAO;
+import com.internousdev.Warasibe.dao.WishDAO;
+import com.internousdev.Warasibe.dto.CommodityDTO;
+import com.internousdev.Warasibe.dto.OtherAccountDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPageAction extends ActionSupport implements SessionAware {
 
 	public Map<String, Object> session;
+	private int userId;
 
+	private OtherAccountDAO accountDAO = new OtherAccountDAO();
+	private OtherAccountDTO accountDTO = new OtherAccountDTO();
+	private WishDAO wishDAO = new WishDAO();
 	private BelongsDAO belongsDAO = new BelongsDAO();
 
-	public ArrayList<BelongsItemDTO> belongsList;
+	private ArrayList<CommodityDTO> wishList;
+	public ArrayList<CommodityDTO> belongsList;
 
 	private String result = ERROR;
 
 	public String execute(){
 		try {
-			belongsList = belongsDAO.getBelongsItem(Integer.parseInt(session.get("id").toString()));
-			result=SUCCESS;
+			setAccountDTO(accountDAO.getAccount(userId));
+			wishList = wishDAO.getWishList(userId);
+			belongsList = belongsDAO.getBelongsItem(userId);
+			result = SUCCESS;
 		} catch (NumberFormatException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
 		return result;
 	}
 
+
+
+	public int getUserId() {
+		return userId;
+	}
+
+
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
+
+	public OtherAccountDTO getAccountDTO() {
+		return accountDTO;
+	}
+
+
+
+	public void setAccountDTO(OtherAccountDTO accountDTO) {
+		this.accountDTO = accountDTO;
+	}
+
+
+
+	public ArrayList<CommodityDTO> getWishList() {
+		return wishList;
+	}
+
+
+
+	public void setWishList(ArrayList<CommodityDTO> wishList) {
+		this.wishList = wishList;
+	}
+
+
+
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
 	}
 

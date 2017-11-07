@@ -7,28 +7,31 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.BelongsDAO;
-import com.internousdev.Warasibe.dto.BelongsItemDTO;
+import com.internousdev.Warasibe.dao.CategoryDAO;
+import com.internousdev.Warasibe.dto.CommodityDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MoveBelongsAction extends ActionSupport implements SessionAware {
 
 	public Map<String, Object> session;
 
-	private BelongsDAO dao = new BelongsDAO();
-	public ArrayList<BelongsItemDTO> belongsList;
+	private BelongsDAO belongsDAO = new BelongsDAO();
+	private CategoryDAO categoryDAO = new CategoryDAO();
+
+	public ArrayList<CommodityDTO> belongsList;
+	public Map<Integer, String> categoryMap;
 
 	private String result = ERROR;
 
 	public String execute(){
 
 		try {
-			belongsList = dao.getBelongsItem(Integer.parseInt(session.get("id").toString()));
+			belongsList = belongsDAO.getBelongsItem(Integer.parseInt(session.get("id").toString()));
+			categoryMap = categoryDAO.getCategoryMap();
 			result = SUCCESS;
 		} catch (NumberFormatException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
@@ -37,7 +40,6 @@ public class MoveBelongsAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
 	}
 

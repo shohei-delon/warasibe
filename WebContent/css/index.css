@@ -2,7 +2,7 @@
 
 #main{
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 #leftSideBar{
@@ -14,6 +14,37 @@
 	width: 800px;
 }
 
-#rightSideBar{
-	width: 300px;
+#centerBar .topicList{
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	padding: 0;
+	margin-left: 20px;
+}
+
+#centerBar .topicList .topicItem{
+	min-width: 50px;
+	text-align: center;
+}
+
+#centerBar .topicList .topicItem span{
+	display: block;
+}
+
+#centerBar .topicList .topicItem .userName{
+	font-size: 20px;
+}
+
+#centerBar .topicList .topicItem .userImage{
+	width: 100px;
+	height: 100px;
+}
+
+#centerBar .topicList .topicItem .userProfile{
+
+}
+
+a{
+	text-decoration: none;
+	color: #333;
 }

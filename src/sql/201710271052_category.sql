@@ -6,4 +6,4 @@ INSERT INTO warasibe.category(name) value
 ("おもちゃ"),
 ("服、靴、時計"),
 ("スポーツ用品"),
-("高級品");
+("その他");

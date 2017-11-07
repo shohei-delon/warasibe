@@ -2,14 +2,14 @@ package com.internousdev.Warasibe.dto;
 
 import java.util.Date;
 
-public class BelongsItemDTO {
+public class CommodityDTO {
 
+	private int id;
 	private int postId;
 	private String name;
 	private String detail;
-	public String category;
+	private String category;
 	private int category_i;
-	private int price;
 	private String color;
 	private float age;
 	private float height;
@@ -19,6 +19,12 @@ public class BelongsItemDTO {
 	private boolean close_trade;
 	private Date postedDate;
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getPostId() {
 		return postId;
 	}
@@ -48,12 +54,6 @@ public class BelongsItemDTO {
 	}
 	public void setCategory_i(int category_i) {
 		this.category_i = category_i;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
 	}
 	public String getColor() {
 		return color;

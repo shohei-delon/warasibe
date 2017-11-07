@@ -12,7 +12,7 @@
 <body>
 
 	<header>
-		<a href="./index.jsp">
+		<a href="<s:url action='IndexAction'/>">
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 
@@ -28,7 +28,7 @@
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
+				<a href='<s:url action="MyPageAction"><s:param name="userId" value="#session.id" /></s:url>'>マイページ</a>
 				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 			</s:else>
 		</div>
@@ -47,23 +47,29 @@
 
 		<div id="centerBar">
 			<h2>firstTopic</h2>
-			<ul class="firstTopicList">
-				<li class="topicItem">
-					<a>
-						<img alt="userImage" src="" class="userImage">
-						<span class="userProfile">よろしく</span>
-					</a>
-				</li>
+			<ul class="topicList">
+				<s:iterator value="firstTopicList" status="list">
+					<li class="topicItem">
+						<a href="<s:url action='MyPageAction'><s:param name='userId' value='getId()' /></s:url>">
+							<span class="userName"><s:property value="getNickname()"/></span>
+							<img alt="userImage" src="./images/user.png" class="userImage">
+							<span class="userProfile">よろしく</span>
+						</a>
+					</li>
+				</s:iterator>
 			</ul>
 
 			<h2>secondTopic</h2>
-			<ul class="secondTopicContainer">
-				<li class="topicItem">
-					<a>
-					<img alt="userImage" src="">
-					<span class="userProfile">よろしく</span>
-					</a>
-				</li>
+			<ul class="topicList">
+				<s:iterator value="secondTopicList">
+					<li class="topicItem">
+						<a href="<s:url action='MyPageAction'><s:param name='userId' value='getId()' /></s:url>">
+							<span><s:property value="getNickname()"/></span>
+							<img alt="userImage" src="./images/user.png" class="userImage">
+							<span class="userProfile">よろしく</span>
+						</a>
+					</li>
+				</s:iterator>
 			</ul>
 		</div>
 	</div>

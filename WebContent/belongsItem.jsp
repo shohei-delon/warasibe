@@ -7,6 +7,7 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/belongsItem.css" >
 </head>
 <body>
 	<header>
@@ -26,32 +27,48 @@
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MypageAction"/>'>マイページ</a>
+				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
 				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 			</s:else>
 		</div>
 	</header>
 
 	<div id="main">
-		<div class="addBelongs">
-			<a href="<s:url value='AddBelongsAction'/>">追加</a>
-		</div>
-		<ul>
+		<ul class="belongsList">
 			<s:iterator value="belongsList">
-				<li>
-					<p class="belongsItemName">名前：<s:property value="getName()" /></p>
-					<p class="belongsItemCategory">カテゴリ：<s:property value="category" /></p>
-					<p class="belongsItemDetail">詳細：<s:property value="getDetail" /></p>
-					<p class="belongsItemSize">サイズ
+				<li class="belongsItem">
+					<p class="belongsItemName"><s:property value="getName()" /></p>
+					<p class="belongsItemCategory"><s:property value="getCategory()" /></p>
+					<p class="belongsItemDetail">詳細：<br><s:property value="getDetail()" /></p>
+					<p class="belongsItemColor"><s:property value="getColor()"/>色</p>
+					<p class="belongsItemSize">
 						<s:property value="getHeight()" />×
 						<s:property value="getWidth()" />×
-						<s:property value="getDepth" />
+						<s:property value="getDepth()" />
 						<s:property value="getSize_unit()" />
 					</p>
-					<p class="belongsItemPrice">値段<s:property value="getPrice()" /></p>
+					<a href="<s:url action='RemoveBelongsAction'><s:param name='itemId' value='getId()'/></s:url>">削除</a>
 				</li>
 			</s:iterator>
 		</ul>
+		<div class="addBelongs">
+			<s:form action="AddBelongsAction" theme="simple">
+				<label>商品名：<br><input type="text" name="name"/></label><br>
+				<label>商品情報：<br><textarea name="detail" cols="30" rows="5"></textarea></label><br>
+				<label>カテゴリ：<br>
+					<s:select name="category_id" list="categoryMap"/>
+				</label><br>
+				<label>色：<br><s:select name="color" list="#{'黒':'黒','白':'白','赤':'赤','青':'青','黄':'黄' }"/></label><br>
+				<label>サイズ：<br>
+					<input type="number" name="height"/>×
+					<input type="number" name="width"/>×
+					<input type="number" name="depth"/>
+					<s:select name="size_unit" list="#{'mm':'mm','cm':'cm','m':'m'}" theme="simple"/>
+				</label><br>
+				<label>使用歴：<br><input type="number" name="age"/>年</label><br>
+				<s:submit value="登録"/>
+			</s:form>
+		</div>
 	</div>
 
 </body>

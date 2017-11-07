@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+#main{
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+#main .belongsList{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#main .belongsList .belongsItem{
+	position: relative;
+	width: 500px;
+	height: 300px;
+	margin-top: 40px;
+	padding: 20px;
+	background-color: rgba(200,200,200,0.5);
+	font-size: 18px;
+}
+
+#main .belongsList .belongsItem .belongsItemName{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 300px;
+	height: 30px;
+	margin: 0;
+	font-size: 35px;
+}
+
+#main .belongsList .belongsItem .belongsItemCategory{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 100px;
+	height: 30px;
+	margin: 0;
+}
+
+#main .belongsList .belongsItem .belongsItemDetail{
+	position: absolute;
+	top: 70px;
+	width: 500px;
+}
+
+#main .belongsList .belongsItem .belongsItemColor{
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+}
+
+#main .belongsList .belongsItem .belongsItemSize{
+	position: absolute;
+	bottom: 20px;
+	left: 80px;
+}
+
+#main .belongsList .belongsItem a{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	display: block;
+	padding: 10px 20px;
+	background-color: rgba(180,180,180,0.5);
+	color: #333;
+	text-decoration: none;
+}
+
+#main .belongsList .belongsItem a:hover{
+	transition: 0.5s;
+	background-color: black;
+	color: white;
+}
+
+#main .addBelongs{
+	width: 300px;
+	margin-left: 200px;
+	padding: 30px;
+	border: 1px solid #333;
+}
+
+#main .addBelongs label{
+	font-size: 18px;
+
+}
+
+
+#main .addBelongs input[type="number"]{
+	width: 50px;
+}
+
+#main .addBelongs input[type="submit"]{
+	display: block;
+	margin-left: auto;
+	padding: 5px 10px;
+	font-size: 15px;
+}

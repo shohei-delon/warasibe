@@ -1,21 +1,24 @@
 package com.internousdev.Warasibe.action;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.Warasibe.dto.BelongsItemDTO;
+import com.internousdev.Warasibe.dao.BelongsDAO;
+import com.internousdev.Warasibe.dto.CommodityDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 	public Map<String, Object> session;
 
+	private BelongsDAO dao = new BelongsDAO();
+
 	private String name;
 	private String detail;
 	private int category_id;
-	private int price;
 	private String color;
 	private float age;
 	private float height;
@@ -28,11 +31,12 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 	public String execute(){
 
-		BelongsItemDTO dto = new BelongsItemDTO();
+		// TODO struts.xml内の最後のブロックにエラーあり
+
+		CommodityDTO dto = new CommodityDTO();
 		dto.setName(name);
 		dto.setDetail(detail);
 		dto.setCategory_i(category_id);
-		dto.setPrice(price);
 		dto.setColor(color);
 		dto.setAge(age);
 		dto.setHeight(height);
@@ -40,10 +44,15 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 		dto.setDepth(depth);
 		dto.setSize_unit(size_unit);
 		dto.setClose_trade(false);
-		dto.setPostedDate(postdate);
-		dto.setPostId(user_id);
+		dto.setPostedDate(new Date());
+		dto.setPostId(Integer.parseInt(session.get("id").toString()));
 
-
+		try {
+			dao.addBelongsItem(dto);
+			result = SUCCESS;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return result;
 	}
@@ -70,14 +79,6 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	public String getColor() {
@@ -146,7 +147,6 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
 	}
 

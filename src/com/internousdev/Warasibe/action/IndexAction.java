@@ -7,14 +7,20 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.IndexDAO;
+import com.internousdev.Warasibe.dao.OtherAccountDAO;
+import com.internousdev.Warasibe.dto.OtherAccountDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class IndexAction extends ActionSupport implements SessionAware {
 
 	public Map<String, Object> session;
 	public ArrayList<String> categoryList;
+	public ArrayList<OtherAccountDTO> firstTopicList;
+	public ArrayList<OtherAccountDTO> secondTopicList;
 
 	private IndexDAO indexDao = new IndexDAO();
+	private OtherAccountDAO firstTopicAccountDAO = new OtherAccountDAO();
+	private OtherAccountDAO secondTopicAccountDAO = new OtherAccountDAO();
 
 	private String result = ERROR;
 
@@ -22,9 +28,10 @@ public class IndexAction extends ActionSupport implements SessionAware {
 
 		try {
 			categoryList = indexDao.getCategory();
+			firstTopicList = firstTopicAccountDAO.getAccountTradeCount();
+			secondTopicList = secondTopicAccountDAO.getAccountEvaluation();
 			result = SUCCESS;
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
@@ -33,7 +40,6 @@ public class IndexAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
 	}
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>
-		<a href="./index.jsp">
+		<a href="<s:url action='IndexAction'/>">
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 
@@ -27,7 +27,7 @@
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MypageAction"/>'>マイページ</a>
+				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
 				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
 			</s:else>
 		</div>
@@ -35,16 +35,29 @@
 
 	<div id="main">
 		<div class="wishListContainer">
-			<h2>欲しいものリスト</h2>
-			<ul>
-				<li>
-					<div>
-					</div>
-				</li>
+			<h3>欲しいものリスト</h3>
+			<ul class="wishList">
+				<s:iterator value="wishList">
+					<li class="sideListItem">
+						<p class="belongsItemName">名前：<s:property value="getName()" /></p>
+						<p class="belongsItemCategory">カテゴリ：<s:property value="getCategory()" /></p>
+						<p class="belongsItemDetail">詳細：<s:property value="getDetail()" /></p>
+						<p class="belongsItemSize">サイズ
+							<s:property value="getHeight()" />×
+							<s:property value="getWidth()" />×
+							<s:property value="getDepth()" />
+							<s:property value="getSize_unit()" />
+						</p>
+						<s:if test="accountDTO.getId() == session.id">
+							<a href="<s:url action='RemoveWishItemAction'><s:param name='commodityId' value='getId()' /><s:param name='userId' value='session.id' /></s:url>">いらない。</a>
+						</s:if>
+					</li>
+				</s:iterator>
 			</ul>
 		</div>
+
 		<div class="centerWraper">
-			<h2>名前のマイページ</h2>
+			<h2><s:property value="accountDTO.getNickname()"/>のマイページ</h2>
 			<div class="centerContainer">
 				<div class="archiveContainer">
 					<h3>実績</h3>
@@ -60,24 +73,29 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="belongsListContainer">
 			<div class="belongsListTop">
-				<h2>所持中のわらしべ</h2>
-				<a href="<s:url action='MoveBelongsAction'/>">編集</a>
+				<h3>所持中のわらしべ</h3>
+				<s:if test="session.id == accountDTO.getId()">
+					<a href="<s:url action='MoveBelongsAction'/>">編集</a>
+				</s:if>
 			</div>
 			<ul class="belongsList">
 				<s:iterator value="belongsList">
-					<li class="belongsItem">
+					<li class="sideListItem">
 						<p class="belongsItemName">名前：<s:property value="getName()" /></p>
-						<p class="belongsItemCategory">カテゴリ：<s:property value="category" /></p>
-						<p class="belongsItemDetail">詳細：<s:property value="getDetail" /></p>
+						<p class="belongsItemCategory">カテゴリ：<s:property value="getCategory()" /></p>
+						<p class="belongsItemDetail">詳細：<s:property value="getDetail()" /></p>
 						<p class="belongsItemSize">サイズ
 							<s:property value="getHeight()" />×
 							<s:property value="getWidth()" />×
-							<s:property value="getDepth" />
+							<s:property value="getDepth()" />
 							<s:property value="getSize_unit()" />
 						</p>
-						<p class="belongsItemPrice">値段<s:property value="getPrice()" /></p>
+						<s:if test="accountDTO.getId() != session.id">
+							<a href="<s:url action='AddWishItemAction'><s:param name='commodityId' value='getId()' /><s:param name='userId' value='session.id' /></s:url>">ほしい。</a>
+						</s:if>
 					</li>
 				</s:iterator>
 			</ul>

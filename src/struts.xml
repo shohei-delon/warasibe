@@ -39,5 +39,27 @@
 		<action name="MoveBelongsAction" class="com.internousdev.Warasibe.action.MoveBelongsAction" method="execute">
 			<result name="success">belongsItem.jsp</result>
 		</action>
+
+		<action name="AddBelongsAction" class="com.internousdev.Warasibe.action.AddBelongsAction" method="execute">
+			<result type="chain" name="success">MoveBelongsAction</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="RemoveBelongsAction" class="com.internousdev.Warasibe.action.RemoveBelongsAction" method="execute">
+			<result type="chain" name="success">MoveBelongsAction</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="AddWishItemAction" class="com.internousdev.Warasibe.action.AddWishItemAction" method="execute">
+			<result type="chain" name="success">MyPageAction</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="RemoveWishItemAction" class="com.internousdev.Warasibe.action.RemoveWishItemAction" method="execute">
+			<result type="chain" name="success">MyPageAction</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+
 	</package>
 </struts>

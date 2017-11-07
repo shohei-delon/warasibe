@@ -36,7 +36,6 @@ public class LoginDAO {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		return accountDTO;

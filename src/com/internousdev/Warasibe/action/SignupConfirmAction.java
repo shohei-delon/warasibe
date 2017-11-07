@@ -25,7 +25,6 @@ public class SignupConfirmAction extends ActionSupport implements SessionAware {
 			session.put("id",id);
 			result = SUCCESS;
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
@@ -34,7 +33,6 @@ public class SignupConfirmAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.session = session;
 	}
 

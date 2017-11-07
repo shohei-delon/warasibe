@@ -9,14 +9,13 @@ id int not null primary key auto_increment,
 name varchar(20),
 detail varchar(255),
 category_id int,
-price int,
 color enum("黒","白","赤","青","黄"),
 age float,
 height float,
 width float,
 depth float,
 size_unit enum("mm","cm","m"),
-close_trade boolean,
+close_trade boolean default false,
 postdate date,
 sell_user_id int,
 buy_user_id int
@@ -29,7 +28,8 @@ login_id varchar(20),
 login_password varchar(20),
 nickname varchar(20),
 mail varchar(255),
-evaluation float DEFAULT 0.0
+evaluation float DEFAULT 0.0,
+trade_count int default 0
 );
 
 DROP TABLE if exists category;
@@ -38,8 +38,8 @@ id int not null primary key auto_increment,
 name varchar(255)
 );
 
-DROP TABLE if exists wish_list_info;
-CREATE TABLE wish_list_info(
+DROP TABLE if exists wish_info;
+CREATE TABLE wish_info(
 id int not null primary key auto_increment,
 user_id int,
 commodity_id int
