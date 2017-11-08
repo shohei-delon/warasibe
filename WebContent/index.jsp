@@ -17,7 +17,7 @@
 		</a>
 
 		<div class="searchContainer">
-			<s:form action="TextSearchAction" theme="simple">
+			<s:form action="SearchAction" theme="simple">
 				<input type="search" name="searchText" class="searchText">
 				<s:submit value=" " class="textSearchSubmit"/>
 			</s:form>
@@ -37,9 +37,9 @@
 	<div id="main">
 		<div id="leftSideBar">
 			<h3>カテゴリ検索</h3>
-			<ul>
-				<s:iterator value="categoryList">
-					<li><s:property /></li>
+			<ul class="categoryList">
+				<s:iterator value="categoryList" status="list">
+					<li class="categoryListItem"><a href="<s:url action='SearchAction'><s:param name='searchCategory' value='#list.count' /></s:url>"><s:property /></a></li>
 				</s:iterator>
 			</ul>
 

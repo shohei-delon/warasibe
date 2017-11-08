@@ -3,10 +3,12 @@ package com.internousdev.Warasibe.action;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.BelongsDAO;
+import com.internousdev.Warasibe.dao.LinkWishDAO;
 import com.internousdev.Warasibe.dao.OtherAccountDAO;
 import com.internousdev.Warasibe.dao.WishDAO;
 import com.internousdev.Warasibe.dto.CommodityDTO;
@@ -18,21 +20,24 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 	public Map<String, Object> session;
 	private int userId;
 
-	private OtherAccountDAO accountDAO = new OtherAccountDAO();
 	private OtherAccountDTO accountDTO = new OtherAccountDTO();
-	private WishDAO wishDAO = new WishDAO();
-	private BelongsDAO belongsDAO = new BelongsDAO();
 
 	private ArrayList<CommodityDTO> wishList;
 	public ArrayList<CommodityDTO> belongsList;
+	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> linkWishMap;
 
 	private String result = ERROR;
 
 	public String execute(){
+		OtherAccountDAO accountDAO = new OtherAccountDAO();
+		WishDAO wishDAO = new WishDAO();
+		BelongsDAO belongsDAO = new BelongsDAO();
+		LinkWishDAO linkWishDAO = new LinkWishDAO();
 		try {
 			setAccountDTO(accountDAO.getAccount(userId));
 			wishList = wishDAO.getWishList(userId);
 			belongsList = belongsDAO.getBelongsItem(userId);
+			setLinkWishMap(linkWishDAO.getEachWishMap(userId).entrySet());
 			result = SUCCESS;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -77,6 +82,19 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 
 	public void setWishList(ArrayList<CommodityDTO> wishList) {
 		this.wishList = wishList;
+	}
+
+
+
+
+	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getLinkWishMap() {
+		return linkWishMap;
+	}
+
+
+
+	public void setLinkWishMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> linkWishMap) {
+		this.linkWishMap = linkWishMap;
 	}
 
 

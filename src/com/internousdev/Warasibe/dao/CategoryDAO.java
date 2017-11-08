@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,6 +28,24 @@ public class CategoryDAO {
 		}
 
 		return categoryMap;
+	}
+
+	public ArrayList<String> getCategoryList() throws SQLException{
+		ArrayList<String> categoryList = new ArrayList<>();
+
+		String sql = "SELECT * FROM category";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+
+		ResultSet resultSet = statement.executeQuery();
+
+		while(resultSet.next()){
+			categoryList.add(resultSet.getString("name"));
+		}
+
+		connection.close();
+
+		return categoryList;
 	}
 
 }

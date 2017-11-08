@@ -65,12 +65,42 @@
 						<li class="archiveItem"></li>
 					</ul>
 				</div>
-				<div class="recentTradeContainer">
-					<h3>最近の取引</h3>
-					<ul class="recentTrade">
-						<li></li>
-					</ul>
-				</div>
+				<s:if test="userId = session.id">
+					<div class="eachWishContainer">
+						<h3>相互ほしい</h3>
+						<ul class="eachWishList">
+							<s:iterator value="linkWishMap">
+								<li class="eachWisItem">
+									<p><a href="<s:url action="MyPageAction"><s:param name="userId" value="getKey().getId()"/></s:url>"><s:property value="getKey().getNickname()"/></a></p>
+									<div>
+										<p class="itemName"><s:property value="getValue()[0].getName()" /></p>
+										<p class="itemCategory"><s:property value="getValue()[0].getCategory()" /></p>
+										<p class="itemDetail">詳細：<br><s:property value="getValue()[0].getDetail()" /></p>
+										<p class="itemColor"><s:property value="getValue()[0].getColor()"/>色</p>
+										<p class="itemSize">
+											<s:property value="getValue()[0].getHeight()" />×
+											<s:property value="getValue()[0].getWidth()" />×
+											<s:property value="getValue()[0].getDepth()" />
+											<s:property value="getValue()[0].getSize_unit()" />
+										</p>
+
+										<p class="itemName"><s:property value="getValue()[1].getName()" /></p>
+										<p class="itemCategory"><s:property value="getValue()[1].getCategory()" /></p>
+										<p class="itemDetail">詳細：<br><s:property value="getValue()[1].getDetail()" /></p>
+										<p class="itemColor"><s:property value="getValue()[1].getColor()"/>色</p>
+										<p class="itemSize">
+											<s:property value="getValue()[1].getHeight()" />×
+											<s:property value="getValue()[1].getWidth()" />×
+											<s:property value="getValue()[1].getDepth()" />
+											<s:property value="getValue()[1].getSize_unit()" />
+										</p>
+
+									</div>
+								</li>
+							</s:iterator>
+						</ul>
+					</div>
+				</s:if>
 			</div>
 		</div>
 
