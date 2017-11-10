@@ -31,8 +31,6 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 	public String execute(){
 
-		// TODO struts.xml内の最後のブロックにエラーあり
-
 		CommodityDTO dto = new CommodityDTO();
 		dto.setName(name);
 		dto.setDetail(detail);

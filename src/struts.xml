@@ -50,6 +50,16 @@
 			<result name="error">error.jsp</result>
 		</action>
 
+		<action name="ApplyingSelectAction" class="com.internousdev.Warasibe.action.ApplyingSelectAction" method="execute">
+			<result name="success">applyingSelect.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="ConfirmApplyingAction" class="com.internousdev.Warasibe.action.ConfirmApplyingAction" method="execute">
+			<result name="success">confirmApplying.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
 		<action name="AddWishItemAction" class="com.internousdev.Warasibe.action.AddWishItemAction" method="execute">
 			<result type="chain" name="success">MyPageAction</result>
 			<result name="error">error.jsp</result>

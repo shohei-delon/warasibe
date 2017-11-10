@@ -13,14 +13,17 @@ public class RemoveWishItemAction extends ActionSupport implements SessionAware 
 	private Map<String, Object> session;
 
 	private int userId;
-	private int commodityId;
+	private int myCommodityId;
+	private int yourUserId;
+	private int yourCommodityId;
 
 	public String execute() {
 		String result = ERROR;
 
 		WishDAO dao = new WishDAO();
+
 		try {
-			dao.removeWishItem(userId, commodityId);
+			dao.removeWishItem(userId, myCommodityId, yourUserId, yourCommodityId);
 			result = SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -29,22 +32,45 @@ public class RemoveWishItemAction extends ActionSupport implements SessionAware 
 		return result;
 	}
 
+
 	public int getUserId() {
 		return userId;
 	}
+
 
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	public int getCommodityId() {
-		return commodityId;
+
+	public int getMyCommodityId() {
+		return myCommodityId;
 	}
 
-	public void setCommodityId(int commodityId) {
-		this.commodityId = commodityId;
+
+	public void setMyCommodityId(int myCommodityId) {
+		this.myCommodityId = myCommodityId;
 	}
 
+
+	public int getYourUserId() {
+		return yourUserId;
+	}
+
+
+	public void setYourUserId(int yourUserId) {
+		this.yourUserId = yourUserId;
+	}
+
+
+	public int getYourCommodityId() {
+		return yourCommodityId;
+	}
+
+
+	public void setYourCommodityId(int yourCommodityId) {
+		this.yourCommodityId = yourCommodityId;
+	}
 
 
 	@Override

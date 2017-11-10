@@ -42,7 +42,6 @@
 					<li class="categoryListItem"><a href="<s:url action='SearchAction'><s:param name='searchCategory' value='#list.count' /></s:url>"><s:property /></a></li>
 				</s:iterator>
 			</ul>
-
 		</div>
 
 		<div id="centerBar">

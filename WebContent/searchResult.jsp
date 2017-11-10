@@ -57,20 +57,20 @@
 			</s:if>
 
 			<ul class="searchList">
-				<s:iterator value="itemList">
+				<s:iterator value="itemList" status="list">
 					<li class="searchItem">
-						<p class="itemName">名前：<s:property value="getName()" /></p>
-						<p class="itemCategory">カテゴリ：<s:property value="getCategory()" /></p>
-						<p class="itemDetail">詳細：<s:property value="getDetail()" /></p>
-						<p class="itemSize">サイズ
-							<s:property value="getHeight()" />×
-							<s:property value="getWidth()" />×
-							<s:property value="getDepth()" />
-							<s:property value="getSize_unit()" />
-						</p>
-						<s:if test="getPostId() != session.id">
-							<a href="<s:url action='AddWishItemAction'><s:param name='commodityId' value='getId()' /><s:param name='userId' value='session.id' /></s:url>">ほしい。</a>
-						</s:if>
+						<a href="<s:url action='MyPageAction'><s:param name='userId' value='getPostId()' /></s:url>">
+							<span class="itemName">名前：<s:property value="getName()" /></span>
+							<span class="itemCategory">カテゴリ：<s:property value="getCategory()" /></span>
+							<span class="itemDetail">詳細：<s:property value="getDetail()" /></span>
+							<span class="itemSize">サイズ
+								<s:property value="getHeight()" />×
+								<s:property value="getWidth()" />×
+								<s:property value="getDepth()" />
+								<s:property value="getSize_unit()" />
+							</span>
+						</a>
+						<a href="<s:url action='ApplyingSelectAction'><s:param name="listIndex" value="#list.index"/></s:url>">交換申請</a>
 					</li>
 				</s:iterator>
 			</ul>

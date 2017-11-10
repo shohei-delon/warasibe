@@ -8,11 +8,11 @@ import java.util.Set;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.BelongsDAO;
-import com.internousdev.Warasibe.dao.LinkWishDAO;
 import com.internousdev.Warasibe.dao.OtherAccountDAO;
 import com.internousdev.Warasibe.dao.WishDAO;
 import com.internousdev.Warasibe.dto.CommodityDTO;
 import com.internousdev.Warasibe.dto.OtherAccountDTO;
+import com.internousdev.Warasibe.util.SessionName;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPageAction extends ActionSupport implements SessionAware {
@@ -22,22 +22,26 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 
 	private OtherAccountDTO accountDTO = new OtherAccountDTO();
 
-	private ArrayList<CommodityDTO> wishList;
-	public ArrayList<CommodityDTO> belongsList;
-	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> linkWishMap;
+	private ArrayList<CommodityDTO> belongsList;
+	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> appliedMap;
+	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> wishMap;
 
 	private String result = ERROR;
 
 	public String execute(){
 		OtherAccountDAO accountDAO = new OtherAccountDAO();
-		WishDAO wishDAO = new WishDAO();
 		BelongsDAO belongsDAO = new BelongsDAO();
-		LinkWishDAO linkWishDAO = new LinkWishDAO();
+		WishDAO wishDAO = new WishDAO();
 		try {
+			setBelongsList(belongsDAO.getBelongsItem(userId));
 			setAccountDTO(accountDAO.getAccount(userId));
-			wishList = wishDAO.getWishList(userId);
-			belongsList = belongsDAO.getBelongsItem(userId);
-			setLinkWishMap(linkWishDAO.getEachWishMap(userId).entrySet());
+			setAppliedMap(wishDAO.getAppliedMap(userId).entrySet());
+			setWishMap(wishDAO.getWishMap(userId).entrySet());
+
+			if(userId != (int)session.get("id")) {
+				session.put(SessionName.getApplyingCommodityList(), belongsList);
+			}
+
 			result = SUCCESS;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -49,6 +53,9 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 	}
 
 
+	public void addApplying(CommodityDTO commodityDTO) {
+		session.put("ApplyingCommodityDTO", commodityDTO);
+	}
 
 	public int getUserId() {
 		return userId;
@@ -73,28 +80,38 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 	}
 
 
-
-	public ArrayList<CommodityDTO> getWishList() {
-		return wishList;
+	public ArrayList<CommodityDTO> getBelongsList() {
+		return belongsList;
 	}
 
 
 
-	public void setWishList(ArrayList<CommodityDTO> wishList) {
-		this.wishList = wishList;
+	public void setBelongsList(ArrayList<CommodityDTO> belongsList) {
+		this.belongsList = belongsList;
 	}
 
 
 
-
-	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getLinkWishMap() {
-		return linkWishMap;
+	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getAppliedMap() {
+		return appliedMap;
 	}
 
 
 
-	public void setLinkWishMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> linkWishMap) {
-		this.linkWishMap = linkWishMap;
+	public void setAppliedMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> appliedMap) {
+		this.appliedMap = appliedMap;
+	}
+
+
+
+	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getWishMap() {
+		return wishMap;
+	}
+
+
+
+	public void setWishMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> wishMap) {
+		this.wishMap = wishMap;
 	}
 
 

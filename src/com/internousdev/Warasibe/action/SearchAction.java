@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.Warasibe.dao.CategoryDAO;
 import com.internousdev.Warasibe.dao.SearchDAO;
 import com.internousdev.Warasibe.dto.CommodityDTO;
+import com.internousdev.Warasibe.util.SessionName;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SearchAction extends ActionSupport implements SessionAware {
@@ -39,6 +40,9 @@ public class SearchAction extends ActionSupport implements SessionAware {
 				setItemList(searchDAO.searchItem());
 				searchText = "指定無し";
 			}
+
+			session.put(SessionName.getApplyingCommodityList(), itemList);
+
 			result = SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();

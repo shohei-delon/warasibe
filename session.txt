@@ -1,0 +1,5 @@
+id			ログイン中ユーザーのID
+applyingCommodityList	交換申請時に選択するときに使う。使用後は消去。
+applyingCommodityDTO	交換申請時のユーザーのほしい商品のDTO
+belongsCommodityList	交換申請時に選択するときに使う。使用後は消去。
+belongsCommodityDTO	交換申請時のユーザーが交換の引き換えに出した商品DTO

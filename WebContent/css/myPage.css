@@ -4,30 +4,44 @@
 	justify-content: space-between;
 }
 
-#main .wishListContainer{
+.mainLeftContainer{
 	margin-top: 100px;
 	width: 250px;
 }
 
-#main .centerWraper{
+.appliedListContainer{
 
 }
 
-#main .centerWraper h2{
+.appliedListContainer h2{
 	font-size: 30px;
 }
 
-#main .centerWraper .centerContainer{
+.list .item {
+	background-color: #ddd;
+	width: 570px;
+	padding:15px;
+	margin-bottom: 10px;
+}
+
+.itemBlockContainer{
 	display: flex;
-	flex-flow: row wrap;
-	min-width: 250px;
+	justify-content: space-between;
+	align-items: center;
 }
 
-#main .centerWraper .centerContainer .archiveContainer{
+.itemBlockContainer .leftItemBlock{
 	width: 250px;
+
 }
 
-#main .centerWraper .centerContainer .recentTradeContainer{
+.itemBlockContainer .indicatorImg{
+	width: 50px;
+	height: 50px;
+	margin: 20px;
+}
+
+.itemBlockContainer .rightItemBlock{
 	width: 250px;
 }
 

@@ -6,25 +6,32 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.Warasibe.dao.WishDAO;
+import com.internousdev.Warasibe.dto.CommodityDTO;
+import com.internousdev.Warasibe.util.SessionName;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddWishItemAction extends ActionSupport implements SessionAware {
 
-	private Map<String, Object> session;
-
 	private int userId;
-	private int commodityId;
+
+	private Map<String, Object> session;
 
 	public String execute() {
 		String result = ERROR;
 
-		WishDAO dao = new WishDAO();
+		CommodityDTO myCommodityDTO = (CommodityDTO) session.get(SessionName.getBelongsCommodityDto());
+		CommodityDTO yourCommodityDTO = (CommodityDTO) session.get(SessionName.getApplyingCommodityDto());
+
 		try {
-			dao.addWishItem(userId, commodityId);
+			WishDAO dao = new WishDAO();
+			dao.addWishItem(myCommodityDTO.getPostId(), myCommodityDTO.getId(), yourCommodityDTO.getPostId(), yourCommodityDTO.getId());
 			result = SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		session.remove(SessionName.getBelongsCommodityDto());
+		session.remove(SessionName.getApplyingCommodityDto());
 
 		return result;
 	}
@@ -35,14 +42,6 @@ public class AddWishItemAction extends ActionSupport implements SessionAware {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public int getCommodityId() {
-		return commodityId;
-	}
-
-	public void setCommodityId(int commodityId) {
-		this.commodityId = commodityId;
 	}
 
 	@Override
