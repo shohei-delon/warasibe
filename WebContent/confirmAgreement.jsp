@@ -7,7 +7,6 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/applying.css" >
 </head>
 <body>
 	<header>
@@ -50,20 +49,20 @@
 			</div>
 			<img alt="←　→" src="./images/trade.png">
 			<div>
-				<p class="appliedItemName"><s:property value="wantCommodityDTO.getName()" /></p>
-				<p class="appliedItemCategory"><s:property value="wantCommodityDTO.getCategory()" /></p>
-				<p class="appliedItemDetail">詳細：<br><s:property value="wantCommodityDTO.getDetail()" /></p>
-				<p class="appliedItemColor"><s:property value="wantCommodityDTO.getColor()"/>色</p>
+				<p class="appliedItemName"><s:property value="yourCommodityDTO.getName()" /></p>
+				<p class="appliedItemCategory"><s:property value="yourCommodityDTO.getCategory()" /></p>
+				<p class="appliedItemDetail">詳細：<br><s:property value="yourCommodityDTO.getDetail()" /></p>
+				<p class="appliedItemColor"><s:property value="yourCommodityDTO.getColor()"/>色</p>
 				<p class="appliedItemSize">
-					<s:property value="wantCommodityDTO.getHeight()" />×
-					<s:property value="wantCommodityDTO.getWidth()" />×
-					<s:property value="wantCommodityDTO.getDepth()" />
-					<s:property value="wantCommodityDTO.getSize_unit()" />
+					<s:property value="yourCommodityDTO.getHeight()" />×
+					<s:property value="yourCommodityDTO.getWidth()" />×
+					<s:property value="yourCommodityDTO.getDepth()" />
+					<s:property value="yourCommodityDTO.getSize_unit()" />
 				</p>
 			</div>
 		</div>
 
-		<a href="<s:url action="AddWishItemAction" ><s:param name="userId" value="#session.id" /></s:url>">決定</a>
+		<a href="<s:url action="AgreeTradingAction" />">承認</a>
 
 	</div>
 

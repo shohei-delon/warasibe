@@ -11,12 +11,12 @@
 </head>
 <body>
 	<header>
-		<a href="./index.jsp">
+		<a href="<s:url action='IndexAction'/>">
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 
 		<div class="searchContainer">
-			<s:form action="TextSearchAction" theme="simple">
+			<s:form action="SearchAction" theme="simple">
 				<input type="search" name="searchText" class="searchText">
 				<s:submit value=" " class="textSearchSubmit"/>
 			</s:form>

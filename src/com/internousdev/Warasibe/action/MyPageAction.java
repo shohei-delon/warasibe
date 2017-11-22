@@ -2,8 +2,8 @@ package com.internousdev.Warasibe.action;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -17,29 +17,49 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPageAction extends ActionSupport implements SessionAware {
 
+	/*
+	 * 画面遷移時に渡された情報群
+	 */
 	public Map<String, Object> session;
+	// 画面遷移時に渡されたユーザーID
 	private int userId;
 
 	private OtherAccountDTO accountDTO = new OtherAccountDTO();
 
-	private ArrayList<CommodityDTO> belongsList;
-	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> appliedMap;
-	private Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> wishMap;
+	/*
+	 * 画面に表示する情報群
+	 */
 
-	private String result = ERROR;
+	private ArrayList<CommodityDTO> belongsList;
+	// 申請が承認されているマップ
+	private LinkedHashMap<Integer, CommodityDTO> agreedMap;
+	// 申請されたマップ
+	private LinkedHashMap<Integer[], CommodityDTO[]> appliedMap;
+	// 申請したマップ
+	private LinkedHashMap<Integer, CommodityDTO[]> wishMap;
 
 	public String execute(){
+		String result = ERROR;
+
+		if(userId == 0) {
+			userId = (int) session.get(SessionName.getId());
+		}
+
 		OtherAccountDAO accountDAO = new OtherAccountDAO();
 		BelongsDAO belongsDAO = new BelongsDAO();
 		WishDAO wishDAO = new WishDAO();
 		try {
-			setBelongsList(belongsDAO.getBelongsItem(userId));
 			setAccountDTO(accountDAO.getAccount(userId));
-			setAppliedMap(wishDAO.getAppliedMap(userId).entrySet());
-			setWishMap(wishDAO.getWishMap(userId).entrySet());
+			setBelongsList(belongsDAO.getBelongsItem(userId));
+			setAgreedMap(wishDAO.getAgreedMap(userId));
+			setAppliedMap(wishDAO.getAppliedMap(userId));
+			setWishMap(wishDAO.getWishMap(userId));
 
 			if(userId != (int)session.get("id")) {
-				session.put(SessionName.getApplyingCommodityList(), belongsList);
+				session.put(SessionName.getApplyingCommodityList(), getBelongsList());
+			}else {
+				session.put(SessionName.getAppliedCommodityMap(), getAppliedMap());
+				session.put(SessionName.getAgreedCommodityMap(), getAgreedMap());
 			}
 
 			result = SUCCESS;
@@ -90,30 +110,34 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 		this.belongsList = belongsList;
 	}
 
+	public LinkedHashMap<Integer, CommodityDTO> getAgreedMap() {
+		return agreedMap;
+	}
 
 
-	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getAppliedMap() {
+	public void setAgreedMap(LinkedHashMap<Integer, CommodityDTO> agreedMap) {
+		this.agreedMap = agreedMap;
+	}
+
+
+	public LinkedHashMap<Integer[], CommodityDTO[]> getAppliedMap() {
 		return appliedMap;
 	}
 
 
-
-	public void setAppliedMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> appliedMap) {
+	public void setAppliedMap(LinkedHashMap<Integer[], CommodityDTO[]> appliedMap) {
 		this.appliedMap = appliedMap;
 	}
 
 
-
-	public Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> getWishMap() {
+	public LinkedHashMap<Integer, CommodityDTO[]> getWishMap() {
 		return wishMap;
 	}
 
 
-
-	public void setWishMap(Set<Map.Entry<OtherAccountDTO, CommodityDTO[]>> wishMap) {
+	public void setWishMap(LinkedHashMap<Integer, CommodityDTO[]> wishMap) {
 		this.wishMap = wishMap;
 	}
-
 
 
 	@Override

@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import com.internousdev.Warasibe.dto.CommodityDTO;
-import com.internousdev.Warasibe.dto.OtherAccountDTO;
 import com.internousdev.Warasibe.util.DBConnector;
 
 public class WishDAO {
@@ -15,11 +14,11 @@ public class WishDAO {
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
 
-	public HashMap<OtherAccountDTO, CommodityDTO[]> getWishMap(int userId) throws SQLException{
-		HashMap<OtherAccountDTO, CommodityDTO[]> map = new HashMap<OtherAccountDTO, CommodityDTO[]>();
+	public LinkedHashMap<Integer, CommodityDTO[]> getWishMap(int userId) throws SQLException{
+		LinkedHashMap<Integer, CommodityDTO[]> map = new LinkedHashMap<>();
 
 		String sql = ""
-				+ "SELECT my_com.*, my_category.name, your_com.*, your_category.name, account.id, account.nickname "
+				+ "SELECT my_com.*, my_category.name, your_com.*, your_category.name, wish_info.* "
 				+ "FROM wish_info "
 				+ "INNER JOIN commodity AS my_com "
 				+ "ON wish_info.have_commodity_id = my_com.id "
@@ -30,18 +29,13 @@ public class WishDAO {
 				+ "ON wish_info.applied_commodity_id = your_com.id "
 				+ "INNER JOIN category AS your_category "
 				+ "ON your_com.category_id = your_category.id "
-				+ "INNER JOIN account "
-				+ "ON wish_info.have_user_id = account.id";
+				+ "WHERE wish_info.agreement = 0";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setInt(1, userId);
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
-			OtherAccountDTO accountDTO = new OtherAccountDTO();
-			accountDTO.setId(resultSet.getInt("account.id"));
-			accountDTO.setNickname(resultSet.getString("account.nickname"));
-
 			CommodityDTO myComDTO = new CommodityDTO();
 			myComDTO.setId(resultSet.getInt("my_com.id"));
 			myComDTO.setPostId(resultSet.getInt("sell_user_id"));
@@ -69,13 +63,35 @@ public class WishDAO {
 			yourComDTO.setDepth(resultSet.getFloat("depth"));
 			yourComDTO.setSize_unit(resultSet.getString("size_unit"));
 			yourComDTO.setPostedDate(resultSet.getDate("postdate"));
+			Integer wishInfoId = resultSet.getInt("wish_info.id");
 
 			CommodityDTO[] dtoList = {myComDTO,yourComDTO};
 
-			map.put(accountDTO, dtoList);
-		}
+			map.put(wishInfoId, dtoList);
 
+		}
 		return map;
+	}
+
+	public int getYourId(int wishInfoId, int myUserId) throws SQLException {
+		String sql = ""
+				+ "SELECT applied_user_id, have_user_id "
+				+ "FROM wish_info "
+				+ "WHERE id = ? ";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, wishInfoId);
+
+		ResultSet resultSet = statement.executeQuery();
+
+		while(resultSet.next()) {
+			if(resultSet.getInt("applied_user_id") == myUserId) {
+				return resultSet.getInt("have_user_id");
+			}else if(resultSet.getInt("have_user_id") == myUserId) {
+				return resultSet.getInt("applied_user_id");
+			}
+		}
+		return 0;
 	}
 
 	public void addWishItem(int myUserId, int myCommodityId, int yourUserId, int yourCommodityId) throws SQLException{
@@ -95,28 +111,22 @@ public class WishDAO {
 		statement.executeUpdate();
 	}
 
-	public void removeWishItem(int myUserId, int myCommodityId, int yourUserId, int yourCommodityId) throws SQLException{
+	public void removeWishItem(int wishInfoId) throws SQLException{
 		String sql = ""
 				+ "DELETE FROM wish_info "
-				+ "WHERE applied_user_id = ? "
-				+ "AND have_commodity_id = ? "
-				+ "AND have_user_id =? "
-				+ "AND applied_commodity_id = ?";
+				+ "WHERE id = ? ";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setInt(1, myUserId);
-		statement.setInt(2, myCommodityId);
-		statement.setInt(3, yourUserId);
-		statement.setInt(4, yourCommodityId);
+		statement.setInt(1, wishInfoId);
 
 		statement.executeUpdate();
 	}
 
-	public HashMap<OtherAccountDTO, CommodityDTO[]> getAppliedMap(int userId) throws SQLException{
-		HashMap<OtherAccountDTO, CommodityDTO[]> map = new HashMap<OtherAccountDTO, CommodityDTO[]>();
+	public LinkedHashMap<Integer[], CommodityDTO[]> getAppliedMap(int userId) throws SQLException{
+		LinkedHashMap<Integer[], CommodityDTO[]> map = new LinkedHashMap<>();
 
 		String sql = ""
-				+ "SELECT my_com.*, my_category.name, your_com.*, your_category.name, account.id, account.nickname "
+				+ "SELECT my_com.*, my_category.name, your_com.*, your_category.name, wish_info.id, wish_info.agreement "
 				+ "FROM wish_info "
 				+ "INNER JOIN commodity AS my_com "
 				+ "ON wish_info.have_commodity_id = my_com.id "
@@ -127,17 +137,14 @@ public class WishDAO {
 				+ "ON wish_info.applied_commodity_id = your_com.id "
 				+ "INNER JOIN category AS your_category "
 				+ "ON your_com.category_id = your_category.id "
-				+ "INNER JOIN account "
-				+ "ON wish_info.have_user_id = account.id";
+				+ "WHERE wish_info.agreement = 0";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setInt(1, userId);
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
-			OtherAccountDTO accountDTO = new OtherAccountDTO();
-			accountDTO.setId(resultSet.getInt("account.id"));
-			accountDTO.setNickname(resultSet.getString("account.nickname"));
+			int wishInfoId = resultSet.getInt("wish_info.id");
 
 			CommodityDTO myComDTO = new CommodityDTO();
 			myComDTO.setId(resultSet.getInt("my_com.id"));
@@ -168,11 +175,68 @@ public class WishDAO {
 			yourComDTO.setPostedDate(resultSet.getDate("postdate"));
 
 			CommodityDTO[] dtoList = {myComDTO,yourComDTO};
+			Integer[] agree_infoId = {resultSet.getInt("wish_info.agreement"), wishInfoId};
 
-			map.put(accountDTO, dtoList);
+			LinkedHashMap<Integer[], CommodityDTO[]> falseMap = new LinkedHashMap<>();
+
+			if(agree_infoId[0] == 0) {
+				falseMap.put(agree_infoId, dtoList);
+			}else {
+				map.put(agree_infoId, dtoList);
+			}
+			map.putAll(falseMap);
 		}
 
 		return map;
 	}
+
+	public LinkedHashMap<Integer, CommodityDTO> getAgreedMap(int userId) throws SQLException {
+		LinkedHashMap<Integer, CommodityDTO> map = new LinkedHashMap<>();
+
+		String sql = ""
+				+ "SELECT com.*, wish_info.id, category.name "
+				+ "FROM wish_info "
+				+ "INNER JOIN trade_status "
+				+ "ON wish_info.id = trade_status.wish_info_id "
+				+ "AND trade_status.progress < 5 "
+				+ "INNER JOIN commodity AS com "
+				+ "ON (wish_info.have_commodity_id = com.id "
+				+ "OR wish_info.applied_commodity_id = com.id) "
+				+ "AND com.sell_user_id = ? "
+				+ "INNER JOIN category "
+				+ "ON com.category_id = category.id "
+				+ "WHERE wish_info.agreement "
+				+ "AND ( wish_info.applied_user_id = ? "
+				+ "OR wish_info.have_user_id = ? ) ";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, userId);
+		statement.setInt(2, userId);
+		statement.setInt(3, userId);
+		ResultSet resultSet = statement.executeQuery();
+
+		while(resultSet.next()) {
+			int wishInfoId = resultSet.getInt("wish_info.id");
+
+			CommodityDTO dto = new CommodityDTO();
+			dto.setId(resultSet.getInt("com.id"));
+			dto.setPostId(resultSet.getInt("com.sell_user_id"));
+			dto.setName(resultSet.getString("com.name"));
+			dto.setDetail(resultSet.getString("com.detail"));
+			dto.setCategory(resultSet.getString("category.name"));
+			dto.setColor(resultSet.getString("com.color"));
+			dto.setAge(resultSet.getInt("com.age"));
+			dto.setHeight(resultSet.getFloat("com.height"));
+			dto.setWidth(resultSet.getFloat("com.width"));
+			dto.setDepth(resultSet.getFloat("com.depth"));
+			dto.setSize_unit(resultSet.getString("com.size_unit"));
+			dto.setPostedDate(resultSet.getDate("com.postdate"));
+
+			map.put(wishInfoId, dto);
+		}
+
+		return map;
+	}
+
 
 }

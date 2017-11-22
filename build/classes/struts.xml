@@ -75,6 +75,32 @@
 			<result name="error">error.jsp</result>
 		</action>
 
+		<action name="ConfirmAgreementAction" class="com.internousdev.Warasibe.action.ConfirmAgreementAction" method="execute">
+			<result name="success">confirmAgreement.jsp</result>
+			<result name="delete">confirmDisagreement.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="AgreeTradingAction" class="com.internousdev.Warasibe.action.AgreeTradingAction" method="execute">
+			<result name="success">howtotrade.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="ConfirmTradingAction" class="com.internousdev.Warasibe.action.ConfirmTradingAction" method="execute">
+			<result name="success">howtotrade.jsp</result>
+			<result name="arrived">review.jsp</result>
+			<result type="chain" name="reviewed">MyPageAction</result>
+			<result type="chain" name="complete">CompleteTradingAction</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="ReviewAction" class="com.internousdev.Warasibe.action.ReviewAction" method="execute">
+			<result type="chain" name="success">ConfirmTradingAction</result>
+		</action>
+
+		<action name="CompleteTradingAction" class="com.internousdev.Warasibe.action.CompleteTradingAction" method="execute">
+			<result name="success">index.jsp</result>
+		</action>
 
 	</package>
 </struts>

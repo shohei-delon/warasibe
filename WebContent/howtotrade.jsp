@@ -6,8 +6,6 @@
 <head>
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/applying.css" >
 </head>
 <body>
 	<header>
@@ -34,8 +32,7 @@
 	</header>
 
 	<div id="main">
-
-		<div>
+		<div class="leftSideBar">
 			<div>
 				<p class="appliedItemName"><s:property value="myCommodityDTO.getName()" /></p>
 				<p class="appliedItemCategory"><s:property value="myCommodityDTO.getCategory()" /></p>
@@ -48,24 +45,29 @@
 					<s:property value="myCommodityDTO.getSize_unit()" />
 				</p>
 			</div>
-			<img alt="←　→" src="./images/trade.png">
 			<div>
-				<p class="appliedItemName"><s:property value="wantCommodityDTO.getName()" /></p>
-				<p class="appliedItemCategory"><s:property value="wantCommodityDTO.getCategory()" /></p>
-				<p class="appliedItemDetail">詳細：<br><s:property value="wantCommodityDTO.getDetail()" /></p>
-				<p class="appliedItemColor"><s:property value="wantCommodityDTO.getColor()"/>色</p>
-				<p class="appliedItemSize">
-					<s:property value="wantCommodityDTO.getHeight()" />×
-					<s:property value="wantCommodityDTO.getWidth()" />×
-					<s:property value="wantCommodityDTO.getDepth()" />
-					<s:property value="wantCommodityDTO.getSize_unit()" />
-				</p>
+				<address>住所：東京都文京区湯島３丁目２−１２</address>
 			</div>
+
+			<a href="<s:url action='MyPageAction'/>">マイページへ</a>
+			<s:if test="checkArrived()">
+				<a href='<s:url action="ConfirmTradingAction" ><s:param name="fromArrive" value="true" /></s:url>'>届いた</a>
+			</s:if>
+		</div>
+		<div class="rightSideBar">
+			<p><s:property value="message"/></p>
+			<ol>
+				<li>商品を弊社へ配送してください。</li>
+				<img src="./images/delivery1.png">
+				<li>商品が揃うまで弊社で保管いたします。</li>
+				<img src="./images/delivery2.png">
+				<li>商品が揃い次第交換先住所へ配送します。</li>
+				<img src="./images/delivery3.png">
+			</ol>
 		</div>
 
-		<a href="<s:url action="AddWishItemAction" ><s:param name="userId" value="#session.id" /></s:url>">決定</a>
-
 	</div>
+
 
 </body>
 </html>

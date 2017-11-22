@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>
-		<a href="./index.jsp">
+		<a href="<s:url action='IndexAction'/>">
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 

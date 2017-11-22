@@ -84,4 +84,19 @@ public class OtherAccountDAO {
 		return list;
 	}
 
+	public void setEvaluation(int rate, int yourId) throws SQLException {
+		if(rate!=0) {
+			String sql = ""
+					+ "UPDATE account "
+					+ "SET evaluation = (evaluation + ?)/2 "
+					+ "WHERE id = ? ";
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, rate);
+			statement.setInt(2, yourId);
+
+			statement.executeUpdate();
+		}
+	}
+
 }

@@ -9,14 +9,9 @@
 </head>
 <body>
 	<header>
-		<img alt="warasibe" src="./images/logo.png" class="icon">
-
-		<div class="searchContainer">
-			<s:form action="TextSearchAction" theme="simple">
-				<input type="search" name="searchText" class="searchText">
-				<s:submit value=" " class="textSearchSubmit"/>
-			</s:form>
-		</div>
+		<a href="<s:url action='IndexAction'/>">
+			<img alt="warasibe" src="./images/logo.png" class="icon">
+		</a>
 
 		<div class="headerRightContainer">
 			<s:if test="#session.id == null">

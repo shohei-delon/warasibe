@@ -2,6 +2,20 @@
 
 #main{
 	display: flex;
+	justify-content: space-around;
+}
+
+.searchList{
+	width: 1000px;
+}
+
+.searchItem{
+	width:300px;
+}
+
+ul{
+	list-style: none;
+	padding: 0;
 }
 
 a{
