@@ -16,6 +16,8 @@ public class SessionName {
 
 	private final static String MY_COMMODITY_DTO = "myCommodityDTO";
 
+	private final static String ACCOUNT_DTO = "accountDTO";
+
 	public static String getId() {
 		return ID;
 	}
@@ -45,6 +47,9 @@ public class SessionName {
 	}
 	public static String getMyCommodityDto() {
 		return MY_COMMODITY_DTO;
+	}
+	public static String getAccountDto() {
+		return ACCOUNT_DTO;
 	}
 
 }

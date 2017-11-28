@@ -5,9 +5,24 @@
 	justify-content: space-evenly;
 }
 
-#leftSideBar{
-	width: 300px;
+#leftBar{
+	width: 200px;
 
+}
+
+#leftBar .categoryList{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#leftBar .categoryList .categoryListItem{
+	padding-left: 10px;
+	border-radius: 15px;
+}
+
+#leftBar .categoryList .categoryListItem:hover{
+	background-color: lightgray;
 }
 
 #centerBar{
@@ -24,7 +39,12 @@
 
 #centerBar .topicList .topicItem{
 	min-width: 50px;
+	padding: 10px;
 	text-align: center;
+}
+
+#centerBar .topicList .topicItem:hover{
+	background-color: lightgray;
 }
 
 #centerBar .topicList .topicItem span{
@@ -41,7 +61,9 @@
 }
 
 #centerBar .topicList .topicItem .userProfile{
-
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 a{

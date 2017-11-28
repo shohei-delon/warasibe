@@ -4,6 +4,7 @@ public class OtherAccountDTO {
 
 	private int id;
 	private String nickname;
+	private String introduce;
 	private float evaluation;
 	private int trade_count;
 
@@ -18,6 +19,12 @@ public class OtherAccountDTO {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
 	public float getEvaluation() {
 		return evaluation;

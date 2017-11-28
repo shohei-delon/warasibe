@@ -7,11 +7,13 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.Warasibe.dao.AccountDAO;
 import com.internousdev.Warasibe.dao.BelongsDAO;
+import com.internousdev.Warasibe.dao.LoginDAO;
 import com.internousdev.Warasibe.dao.OtherAccountDAO;
 import com.internousdev.Warasibe.dao.WishDAO;
+import com.internousdev.Warasibe.dto.AccountDTO;
 import com.internousdev.Warasibe.dto.CommodityDTO;
-import com.internousdev.Warasibe.dto.OtherAccountDTO;
 import com.internousdev.Warasibe.util.SessionName;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,7 +26,7 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 	// 画面遷移時に渡されたユーザーID
 	private int userId;
 
-	private OtherAccountDTO accountDTO = new OtherAccountDTO();
+	private AccountDTO accountDTO;
 
 	/*
 	 * 画面に表示する情報群
@@ -32,7 +34,7 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 
 	private ArrayList<CommodityDTO> belongsList;
 	// 申請が承認されているマップ
-	private LinkedHashMap<Integer, CommodityDTO> agreedMap;
+	private LinkedHashMap<Integer, CommodityDTO[]> agreedMap;
 	// 申請されたマップ
 	private LinkedHashMap<Integer[], CommodityDTO[]> appliedMap;
 	// 申請したマップ
@@ -40,12 +42,17 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 
 	public String execute(){
 		String result = ERROR;
+		int loginedId = (int) session.get(SessionName.getId());
 
-		if(userId == 0) {
-			userId = (int) session.get(SessionName.getId());
+		AccountDAO accountDAO;
+
+		if(userId == 0) userId = loginedId;
+
+		if(userId == loginedId) {
+			accountDAO = new LoginDAO();
+		}else {
+			accountDAO = new OtherAccountDAO();
 		}
-
-		OtherAccountDAO accountDAO = new OtherAccountDAO();
 		BelongsDAO belongsDAO = new BelongsDAO();
 		WishDAO wishDAO = new WishDAO();
 		try {
@@ -60,6 +67,7 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 			}else {
 				session.put(SessionName.getAppliedCommodityMap(), getAppliedMap());
 				session.put(SessionName.getAgreedCommodityMap(), getAgreedMap());
+				session.put(SessionName.getAccountDto(), getAccountDTO());
 			}
 
 			result = SUCCESS;
@@ -89,13 +97,13 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 
 
 
-	public OtherAccountDTO getAccountDTO() {
+	public AccountDTO getAccountDTO() {
 		return accountDTO;
 	}
 
 
 
-	public void setAccountDTO(OtherAccountDTO accountDTO) {
+	public void setAccountDTO(AccountDTO accountDTO) {
 		this.accountDTO = accountDTO;
 	}
 
@@ -110,12 +118,12 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 		this.belongsList = belongsList;
 	}
 
-	public LinkedHashMap<Integer, CommodityDTO> getAgreedMap() {
+	public LinkedHashMap<Integer, CommodityDTO[]> getAgreedMap() {
 		return agreedMap;
 	}
 
 
-	public void setAgreedMap(LinkedHashMap<Integer, CommodityDTO> agreedMap) {
+	public void setAgreedMap(LinkedHashMap<Integer, CommodityDTO[]> agreedMap) {
 		this.agreedMap = agreedMap;
 	}
 

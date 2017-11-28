@@ -190,24 +190,27 @@ public class WishDAO {
 		return map;
 	}
 
-	public LinkedHashMap<Integer, CommodityDTO> getAgreedMap(int userId) throws SQLException {
-		LinkedHashMap<Integer, CommodityDTO> map = new LinkedHashMap<>();
+	public LinkedHashMap<Integer, CommodityDTO[]> getAgreedMap(int userId) throws SQLException {
+		LinkedHashMap<Integer, CommodityDTO[]> map = new LinkedHashMap<>();
 
 		String sql = ""
-				+ "SELECT com.*, wish_info.id, category.name "
+				+ "SELECT com1.id, com1.name, com1.sell_user_id, com2.id, com2.name, com2.sell_user_id, wish_info.id "
 				+ "FROM wish_info "
 				+ "INNER JOIN trade_status "
 				+ "ON wish_info.id = trade_status.wish_info_id "
 				+ "AND trade_status.progress < 5 "
-				+ "INNER JOIN commodity AS com "
-				+ "ON (wish_info.have_commodity_id = com.id "
-				+ "OR wish_info.applied_commodity_id = com.id) "
-				+ "AND com.sell_user_id = ? "
-				+ "INNER JOIN category "
-				+ "ON com.category_id = category.id "
+				+ "INNER JOIN commodity AS com1 "
+				+ "ON (wish_info.have_commodity_id = com1.id "
+				+ "OR wish_info.applied_commodity_id = com1.id) "
+				+ "AND com1.sell_user_id = ? "
+				+ "INNER JOIN commodity AS com2 "
+				+ "ON (wish_info.applied_commodity_id = com2.id "
+				+ "OR wish_info.have_commodity_id = com2.id) "
 				+ "WHERE wish_info.agreement "
 				+ "AND ( wish_info.applied_user_id = ? "
 				+ "OR wish_info.have_user_id = ? ) ";
+
+		//TODO sql文に苦戦中　両方のアイテムが欲しい
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setInt(1, userId);
@@ -218,21 +221,16 @@ public class WishDAO {
 		while(resultSet.next()) {
 			int wishInfoId = resultSet.getInt("wish_info.id");
 
-			CommodityDTO dto = new CommodityDTO();
-			dto.setId(resultSet.getInt("com.id"));
-			dto.setPostId(resultSet.getInt("com.sell_user_id"));
-			dto.setName(resultSet.getString("com.name"));
-			dto.setDetail(resultSet.getString("com.detail"));
-			dto.setCategory(resultSet.getString("category.name"));
-			dto.setColor(resultSet.getString("com.color"));
-			dto.setAge(resultSet.getInt("com.age"));
-			dto.setHeight(resultSet.getFloat("com.height"));
-			dto.setWidth(resultSet.getFloat("com.width"));
-			dto.setDepth(resultSet.getFloat("com.depth"));
-			dto.setSize_unit(resultSet.getString("com.size_unit"));
-			dto.setPostedDate(resultSet.getDate("com.postdate"));
+			CommodityDTO myDto = new CommodityDTO();
+			myDto.setId(resultSet.getInt("com1.id"));
+			myDto.setPostId(resultSet.getInt("com1.sell_user_id"));
+			myDto.setName(resultSet.getString("com1.name"));
 
-			map.put(wishInfoId, dto);
+			CommodityDTO yourDto = new CommodityDTO();
+			yourDto.setId(resultSet.getInt("com2.id"));
+			yourDto.setPostId(resultSet.getInt("com2.sell_user_id"));
+			yourDto.setName(resultSet.getString("com2.name"));
+			map.put(wishInfoId, new CommodityDTO[] {myDto, yourDto});
 		}
 
 		return map;

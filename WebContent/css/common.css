@@ -34,3 +34,17 @@ header .searchContainer .textSearchSubmit{
 header .headerRightContainer{
 
 }
+
+header .headerRightContainer a{
+	padding: 10px;
+	transition: background-color 0.5s;
+}
+
+header .headerRightContainer a:hover{
+	background-color: lightgray;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}

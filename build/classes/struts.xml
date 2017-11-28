@@ -50,6 +50,27 @@
 			<result name="error">error.jsp</result>
 		</action>
 
+		<action name="MoveProfileAction" class="com.internousdev.Warasibe.action.MoveProfileAction" method="execute">
+			<result name="success">editProfile.jsp</result>
+		</action>
+
+		<action name="EditProfileAction" class="com.internousdev.Warasibe.action.EditProfileAction" method="execute">
+			<result type="chain" name="success">MyPageAction</result>
+			<result name="back">editProfile.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="MoveLoginAuthAction" class="com.internousdev.Warasibe.action.MoveLoginAuthAction" method="execute">
+			<result name="success">editLoginAuth.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="EditLoginAuthAction" class="com.internousdev.Warasibe.action.EditLoginAuthAction" method="execute">
+			<result type="chain" name="success">MyPageAction</result>
+			<result name="back">editLoginAuth.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
 		<action name="ApplyingSelectAction" class="com.internousdev.Warasibe.action.ApplyingSelectAction" method="execute">
 			<result name="success">applyingSelect.jsp</result>
 			<result name="error">error.jsp</result>

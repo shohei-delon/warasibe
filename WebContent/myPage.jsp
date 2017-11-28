@@ -36,37 +36,30 @@
 	<div id="main">
 		<div class="mainLeftContainer">
 			<h2><s:property value="accountDTO.getNickname()"/>のマイページ</h2>
-			<div class="belongsListTop">
-				<h3>所持中のわらしべ</h3>
-				<s:if test="session.id == accountDTO.getId()">
-					<a href="<s:url action='MoveBelongsAction'/>">編集</a>
-				</s:if>
-			</div>
+			<h3><s:property value="accountDTO.getIntroduce()"/></h3>
+			<s:if test="session.id == accountDTO.getId()">
+				<ul>
+					<li><a href="<s:url action='MoveLoginAuthAction'/>">ログイン情報の編集</a></li>
+					<li><a href="<s:url action='MoveProfileAction'/>">プロフィールの編集</a></li>
+					<li><a href="<s:url action='MoveBelongsAction'/>">所持品の編集</a></li>
+				</ul>
+			</s:if>
 		</div>
 
 		<s:if test="userId == session.id">
 			<div class="mainRightContainer">
-				<div class="topContainer">
-					<h3>交換取引中</h3>
-					<ul class="topList">
-						<s:iterator value="agreedMap" status="map">
-							<li class="topItem">
-								<a href="<s:url action="ConfirmTradingAction"><s:param name="listIndex" value="#list.index"/></s:url>">
-									<span class="belongsItemName"><s:property value="getValue().getName()" /></span>
-									<span class="belongsItemCategory"><s:property value="getValue().getCategory()" /></span>
-									<span class="belongsItemDetail">詳細：<br><s:property value="getValue().getDetail()" /></span>
-									<span class="belongsItemColor"><s:property value="getValue().getColor()"/>色</span>
-									<span class="belongsItemSize">
-										<s:property value="getValue().getHeight()" />×
-										<s:property value="getValue().getWidth()" />×
-										<s:property value="getValue().getDepth()" />
-										<s:property value="getValue().getSize_unit()" />
-									</span>
-								</a>
-							</li>
-						</s:iterator>
-					</ul>
-				</div>
+				<h3>交換取引中</h3>
+				<ul class="topList">
+					<s:iterator value="agreedMap" status="map">
+						<li class="topItem">
+							<a href="<s:url action="ConfirmTradingAction"><s:param name="listIndex" value="#list.index"/></s:url>">
+								<span class="belongsItemName"><s:property value="getValue()[0].getName()" /></span>
+								<img alt="↑↓" src="./images/tradeVertical.png" class="indicatorImg" >
+								<span class="belongsItemName"><s:property value="getValue()[1].getName()" /></span>
+							</a>
+						</li>
+					</s:iterator>
+				</ul>
 				<div class="appliedListContainer">
 					<h3>申し込まれた交換</h3>
 					<ul class="list">

@@ -35,7 +35,7 @@
 	</header>
 
 	<div id="main">
-		<div id="leftSideBar">
+		<div id="leftBar">
 			<h3>カテゴリ検索</h3>
 			<ul class="categoryList">
 				<s:iterator value="categoryList" status="list">
@@ -45,27 +45,27 @@
 		</div>
 
 		<div id="centerBar">
-			<h2>firstTopic</h2>
+			<h2>活発ユーザーランキング</h2>
 			<ul class="topicList">
 				<s:iterator value="firstTopicList" status="list">
 					<li class="topicItem">
 						<a href="<s:url action='MyPageAction'><s:param name='userId' value='getId()' /></s:url>">
 							<span class="userName"><s:property value="getNickname()"/></span>
 							<img alt="userImage" src="./images/user.png" class="userImage">
-							<span class="userProfile">よろしく</span>
+							<span class="userProfile"><s:property value="getIntroduce()"/></span>
 						</a>
 					</li>
 				</s:iterator>
 			</ul>
 
-			<h2>secondTopic</h2>
+			<h2>高評価ユーザーランキング</h2>
 			<ul class="topicList">
 				<s:iterator value="secondTopicList">
 					<li class="topicItem">
 						<a href="<s:url action='MyPageAction'><s:param name='userId' value='getId()' /></s:url>">
 							<span><s:property value="getNickname()"/></span>
 							<img alt="userImage" src="./images/user.png" class="userImage">
-							<span class="userProfile">よろしく</span>
+							<span class="userProfile"><s:property value="getIntroduce()"/></span>
 						</a>
 					</li>
 				</s:iterator>

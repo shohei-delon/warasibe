@@ -6,19 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.internousdev.Warasibe.dto.AccountDTO;
 import com.internousdev.Warasibe.dto.OtherAccountDTO;
 import com.internousdev.Warasibe.util.DBConnector;
 
-public class OtherAccountDAO {
+public class OtherAccountDAO implements AccountDAO{
 
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
 
-	public OtherAccountDTO getAccount(int id) throws SQLException {
-		OtherAccountDTO dto = new OtherAccountDTO();
+	@Override
+	public AccountDTO getAccount(int id) throws SQLException {
+		AccountDTO dto = new AccountDTO();
 
 		String sql = ""
-				+ "SELECT id, nickname, evaluation, trade_count "
+				+ "SELECT id, nickname, introduce, evaluation, trade_count "
 				+ "FROM account "
 				+ "WHERE id = ?";
 
@@ -29,8 +31,9 @@ public class OtherAccountDAO {
 		while(resultSet.next()) {
 			dto.setId(resultSet.getInt("id"));
 			dto.setNickname(resultSet.getString("nickname"));
+			dto.setIntroduce(resultSet.getString("introduce"));
 			dto.setEvaluation(resultSet.getFloat("evaluation"));
-			dto.setTrade_count(resultSet.getInt("trade_count"));
+			dto.setTradeCount(resultSet.getInt("trade_count"));
 		}
 
 		return dto;
@@ -40,7 +43,7 @@ public class OtherAccountDAO {
 		ArrayList<OtherAccountDTO> list = new ArrayList<>();
 
 		String sql = ""
-				+ "SELECT id, nickname, evaluation, trade_count "
+				+ "SELECT id, nickname, introduce, evaluation, trade_count "
 				+ "FROM account "
 				+ "ORDER BY trade_count DESC "
 				+ "LIMIT 5";
@@ -52,6 +55,7 @@ public class OtherAccountDAO {
 			OtherAccountDTO dto = new OtherAccountDTO();
 			dto.setId(resultSet.getInt("id"));
 			dto.setNickname(resultSet.getString("nickname"));
+			dto.setIntroduce(resultSet.getString("introduce"));
 			dto.setEvaluation(resultSet.getFloat("evaluation"));
 			dto.setTrade_count(resultSet.getInt("trade_count"));
 			list.add(dto);
@@ -64,7 +68,7 @@ public class OtherAccountDAO {
 		ArrayList<OtherAccountDTO> list = new ArrayList<>();
 
 		String sql = ""
-				+ "SELECT id, nickname, evaluation, trade_count "
+				+ "SELECT id, nickname, introduce, evaluation, trade_count "
 				+ "FROM account "
 				+ "ORDER BY evaluation DESC "
 				+ "LIMIT 5";
@@ -76,6 +80,7 @@ public class OtherAccountDAO {
 			OtherAccountDTO dto = new OtherAccountDTO();
 			dto.setId(resultSet.getInt("id"));
 			dto.setNickname(resultSet.getString("nickname"));
+			dto.setIntroduce(resultSet.getString("introduce"));
 			dto.setEvaluation(resultSet.getFloat("evaluation"));
 			dto.setTrade_count(resultSet.getInt("trade_count"));
 			list.add(dto);

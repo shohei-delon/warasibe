@@ -6,8 +6,10 @@ public class AccountDTO {
 	private String loginUserId;
 	private String loginPassword;
 	private String mail;
+	private String introduce;
 	private String nickname;
 	private float evaluation;
+	private int tradeCount;
 
 	private boolean login = false;
 
@@ -35,6 +37,12 @@ public class AccountDTO {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -46,6 +54,12 @@ public class AccountDTO {
 	}
 	public void setEvaluation(float evaluation) {
 		this.evaluation = evaluation;
+	}
+	public int getTradeCount() {
+		return tradeCount;
+	}
+	public void setTradeCount(int tradeCount) {
+		this.tradeCount = tradeCount;
 	}
 	public boolean isLogin() {
 		return login;
