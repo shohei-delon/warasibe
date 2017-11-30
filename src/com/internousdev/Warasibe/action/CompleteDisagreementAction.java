@@ -23,8 +23,9 @@ public class CompleteDisagreementAction extends ActionSupport implements Session
 	public String execute() {
 
 		@SuppressWarnings("unchecked")
-		LinkedHashMap<Integer, CommodityDTO> appliedMap = (LinkedHashMap<Integer, CommodityDTO>) session.get(SessionName.getAgreedCommodityMap());
-		myCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex);
+		LinkedHashMap<Integer, CommodityDTO[]> appliedMap = (LinkedHashMap<Integer, CommodityDTO[]>) session.get(SessionName.getAgreedCommodityMap());
+		myCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex)[0];
+		yourCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex)[1];
 
 		ArrayList<Integer> wishInfoIdList = new ArrayList<>(appliedMap.keySet());
 

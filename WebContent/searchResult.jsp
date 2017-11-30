@@ -22,15 +22,15 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"><s:param name="userId" value="#session.id" /></s:url>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<li class="headerRightItem"><a href='<s:url action="MyPageAction"><s:param name="userId" value="#session.id" /></s:url>'>マイページ</a></li>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -50,11 +50,14 @@
 		</div>
 
 		<div id="mainBar">
-			<h2>検索結果</h2>
-			<s:if test="searchText != null">
+			<s:if test='searchText != null && !searchText.equals("")'>
+				<h2>検索結果</h2>
 				<p>検索テキスト：<s:property value="searchText"/></p>
 				<p>検索ヒット数：<s:property value="itemList.size()"/>件</p>
 			</s:if>
+			<s:else>
+				<h2>全件表示</h2>
+			</s:else>
 
 			<ul class="searchList">
 				<s:iterator value="itemList" status="list">
@@ -71,7 +74,9 @@
 							</span>
 						</a>
 						<s:if test="session.id != getPostId()">
-							<a href="<s:url action='ApplyingSelectAction'><s:param name="listIndex" value="#list.index"/></s:url>">交換申請</a>
+							<div class="center">
+								<a href="<s:url action='ApplyingSelectAction'><s:param name="listIndex" value="#list.index"/></s:url>" class="submit">交換申請</a>
+							</div>
 						</s:if>
 					</li>
 				</s:iterator>

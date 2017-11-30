@@ -19,7 +19,6 @@ public class SignupAction extends ActionSupport implements SessionAware {
 	public Map<String, Object> session;
 
 	public String message;
-	private String result = ERROR;
 
 	public String execute(){
 		if(validInput()){
@@ -28,9 +27,9 @@ public class SignupAction extends ActionSupport implements SessionAware {
 			accountDTO.setNickname(nickname);
 			accountDTO.setMail(mail);
 			session.put("accountDTO", accountDTO);
-			result = SUCCESS;
+			return SUCCESS;
 		}
-		return result;
+		return ERROR;
 	}
 
 	private boolean validInput(){
@@ -47,7 +46,6 @@ public class SignupAction extends ActionSupport implements SessionAware {
 			return true;
 		}
 		message = sb.toString();
-		System.out.println("errorMessage:"+message);
 		return false;
 	}
 

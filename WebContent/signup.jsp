@@ -7,7 +7,7 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/login_authentification.css" >
+	<link rel="stylesheet" href="./css/login_auth.css" >
 </head>
 <body>
 	<header>
@@ -15,15 +15,9 @@
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 
-		<div class="headerRightContainer">
-			<s:if test="#session.id == null">
-				<a href="./login.jsp">ログイン</a>
-			</s:if>
-			<s:else>
-				<a href='<s:url action="MoveMypageAction"/>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
-			</s:else>
-		</div>
+		<ul class="headerRightList">
+			<li class="headerRightItem"><a href="./login.jsp">ログイン</a></li>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -33,32 +27,36 @@
 		</s:if>
 		<s:form action="SignupAction" theme="simple">
 
-			<label>ログインID:</label><br>
-			<s:if test="signupUserId != null">
-				<input type="text" name="signupUserId" value="<s:property value='signupUserId'/>"><br>
-			</s:if>
-			<s:else>
-				<input type="text" name="signupUserId"/><br>
-			</s:else>
+			<label >ログインID:<br>
+				<s:if test="signupUserId != null">
+					<input type="text" name="signupUserId" value="<s:property value='signupUserId'/>"><br>
+				</s:if>
+				<s:else>
+					<input type="text" name="signupUserId"/><br>
+				</s:else>
+			</label>
 
-			<label>パスワード:</label><br>
-			<input type="password" name="signupPassword"><br>
+			<label>パスワード:<br>
+				<input type="password" name="signupPassword"><br>
+			</label>
 
-			<label>ユーザーネーム:</label><br>
-			<s:if test="nickname != null">
-				<input type="text" name="nickname" value="<s:property value='nickname'/>"><br>
-			</s:if>
-			<s:else>
-				<input type="text" name="nickname"><br>
-			</s:else>
+			<label>ユーザーネーム:<br>
+				<s:if test="nickname != null">
+					<input type="text" name="nickname" value="<s:property value='nickname'/>"><br>
+				</s:if>
+				<s:else>
+					<input type="text" name="nickname"><br>
+				</s:else>
+			</label>
 
-			<label>メールアドレス:</label><br>
-			<s:if test="mail != null">
-				<input type="email" name="mail" value="<s:property value='mail'/>"><br>
-			</s:if>
-			<s:else>
-				<input type="email" name="mail"><br>
-			</s:else>
+			<label>メールアドレス:<br>
+				<s:if test="mail != null">
+					<input type="email" name="mail" value="<s:property value='mail'/>"><br>
+				</s:if>
+				<s:else>
+					<input type="email" name="mail"><br>
+				</s:else>
+			</label>
 
 			<s:submit value="新規登録"/>
 		</s:form>

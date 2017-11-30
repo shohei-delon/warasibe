@@ -34,6 +34,7 @@
 	<div id="main">
 		<div class="leftSideBar">
 			<div>
+				<p>配送するもの</p>
 				<p class="appliedItemName"><s:property value="myCommodityDTO.getName()" /></p>
 				<p class="appliedItemCategory"><s:property value="myCommodityDTO.getCategory()" /></p>
 				<p class="appliedItemDetail">詳細：<br><s:property value="myCommodityDTO.getDetail()" /></p>
@@ -44,9 +45,21 @@
 					<s:property value="myCommodityDTO.getDepth()" />
 					<s:property value="myCommodityDTO.getSize_unit()" />
 				</p>
-			</div>
-			<div>
 				<address>住所：東京都文京区湯島３丁目２−１２</address>
+			</div>
+			<img alt="↓↑" src="./images/tradeVertical.png">
+			<div>
+				<p>届くもの</p>
+				<p class="appliedItemName"><s:property value="yourCommodityDTO.getName()" /></p>
+				<p class="appliedItemCategory"><s:property value="yourCommodityDTO.getCategory()" /></p>
+				<p class="appliedItemDetail">詳細：<br><s:property value="yourCommodityDTO.getDetail()" /></p>
+				<p class="appliedItemColor"><s:property value="yourCommodityDTO.getColor()"/>色</p>
+				<p class="appliedItemSize">
+					<s:property value="yourCommodityDTO.getHeight()" />×
+					<s:property value="yourCommodityDTO.getWidth()" />×
+					<s:property value="yourCommodityDTO.getDepth()" />
+					<s:property value="yourCommodityDTO.getSize_unit()" />
+				</p>
 			</div>
 
 			<a href="<s:url action='MyPageAction'/>">マイページへ</a>

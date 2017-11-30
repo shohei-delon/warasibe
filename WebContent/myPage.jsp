@@ -22,15 +22,17 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<s:if test="#session.id != userId">
+					<li class="headerRightItem"><a href='<s:url action="MyPageAction"/>'>マイページ</a></li>
+				</s:if>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -53,8 +55,8 @@
 					<s:iterator value="agreedMap" status="map">
 						<li class="topItem">
 							<a href="<s:url action="ConfirmTradingAction"><s:param name="listIndex" value="#list.index"/></s:url>">
-								<span class="belongsItemName"><s:property value="getValue()[0].getName()" /></span>
-								<img alt="↑↓" src="./images/tradeVertical.png" class="indicatorImg" >
+								<span class="belongsItemName"><s:property value="getValue()[0].getName()" /></span><br>
+								<img alt="↑↓" src="./images/tradeVertical.png" class="indicatorImg" ><br>
 								<span class="belongsItemName"><s:property value="getValue()[1].getName()" /></span>
 							</a>
 						</li>
@@ -143,11 +145,13 @@
 										</p>
 									</div>
 								</div>
-								<a href="
-									<s:url action='RemoveWishItemAction'>
-										<s:param name='wishInfoId' value='getKey()' />
-									</s:url>
-								">申請の取り消し</a>
+								<div class="submitContainer">
+									<a href="
+										<s:url action='RemoveWishItemAction'>
+											<s:param name='wishInfoId' value='getKey()' />
+										</s:url>
+									">申請の取り消し</a>
+								</div>
 							</li>
 						</s:iterator>
 					</ul>
@@ -157,9 +161,10 @@
 		<s:else>
 			<div class="mainRightContainer">
 				<div class="topContainer">
-					<ul class="belongsList">
+					<h2>所持品一覧</h2>
+					<ul class="list">
 						<s:iterator value="belongsList" status="list">
-							<li class="belongsItem">
+							<li class="item">
 								<p class="belongsItemName"><s:property value="getName()" /></p>
 								<p class="belongsItemCategory"><s:property value="getCategory()" /></p>
 								<p class="belongsItemDetail">詳細：<br><s:property value="getDetail()" /></p>
@@ -170,7 +175,9 @@
 									<s:property value="getDepth()" />
 									<s:property value="getSize_unit()" />
 								</p>
-								<a href="<s:url action="ApplyingSelectAction"><s:param name="listIndex" value="#list.index"/></s:url>">交換申請</a>
+								<div class="submitContainer">
+									<a href="<s:url action="ApplyingSelectAction"><s:param name="listIndex" value="#list.index"/></s:url>">交換申請</a>
+								</div>
 							</li>
 						</s:iterator>
 					</ul>

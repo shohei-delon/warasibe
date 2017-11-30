@@ -1,20 +1,24 @@
 @CHARSET "UTF-8";
 #main{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .mainLeftContainer{
-	margin-top: 100px;
-	width: 250px;
+	margin: 100px 0 0 150px;
+	min-width: 250px;
 }
 
 .mainRightContainer{
-	width: 800px;
+	min-width: 800px;
 }
 
 .topList{
 	display: flex;
+}
+
+.topList .topItem{
+	text-align: center;
 }
 
 .appliedListContainer{
@@ -26,10 +30,10 @@
 }
 
 .list .item {
-	background-color: #ddd;
 	width: 570px;
 	padding:15px;
 	margin-bottom: 10px;
+	background-color: white;
 }
 
 .itemBlockContainer{
@@ -53,9 +57,65 @@
 	width: 250px;
 }
 
+.itemBlockContainer > div > p,span{
+	display: block;
+	padding: 0;
+	margin: 0;
+	font-size: 18px;
+	color: black;
+}
+
+.submitContainer{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.submitContainer a{
+	display: inline-block;
+	position: relative;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	color: #000;
+	transition: .4s;
+}
+
+.submitContainer > a:hover{
+	padding: 0.5em 2em;
+    color:#ff7f7f;
+}
+
+.submitContainer > a:before,a:after{
+	position: absolute;
+	top: 0;
+	content:'';
+	width: 8px;
+	height: 100%;
+	display: inline-block;
+}
+
+.submitContainer > a:before{
+	border-left: solid 1px #ff7f7f;
+	border-top: solid 1px #ff7f7f;
+	border-bottom: solid 1px #ff7f7f;
+	left: 0;
+}
+
+.submitContainer > a:after{
+	border-top: solid 1px #ff7f7f;
+	border-right: solid 1px #ff7f7f;
+	border-bottom: solid 1px #ff7f7f;
+	right: 0;
+}
+
 #main .belongsListContainer{
 	margin-top: 100px;
 	width: 250px;
+}
+
+.indicatorImg{
+	width: 50px;
+	height: 50px;
+	margin: 20px;
 }
 
 ul{

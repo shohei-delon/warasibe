@@ -2,18 +2,12 @@
 
 #main{
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 }
 
 #leftBar{
-	width: 200px;
-
-}
-
-#leftBar .categoryList{
-	list-style: none;
-	margin: 0;
-	padding: 0;
+	min-width: 200px;
+	margin-left: 50px;
 }
 
 #leftBar .categoryList .categoryListItem{
@@ -27,6 +21,7 @@
 
 #centerBar{
 	width: 800px;
+	margin: 0 50px;
 }
 
 #centerBar .topicList{

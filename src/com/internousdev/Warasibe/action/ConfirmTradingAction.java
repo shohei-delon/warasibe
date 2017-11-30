@@ -21,6 +21,7 @@ public class ConfirmTradingAction extends ActionSupport implements SessionAware 
 	private boolean fromReview;
 
 	private CommodityDTO myCommodityDTO;
+	private CommodityDTO yourCommodityDTO;
 
 	private int yourId;
 	private int userId;
@@ -34,8 +35,9 @@ public class ConfirmTradingAction extends ActionSupport implements SessionAware 
 	@Override
 	public String execute() {
 		@SuppressWarnings("unchecked")
-		LinkedHashMap<Integer, CommodityDTO> appliedMap = (LinkedHashMap<Integer, CommodityDTO>) session.get(SessionName.getAgreedCommodityMap());
-		myCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex);
+		LinkedHashMap<Integer, CommodityDTO[]> appliedMap = (LinkedHashMap<Integer, CommodityDTO[]>) session.get(SessionName.getAgreedCommodityMap());
+		myCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex)[0];
+		yourCommodityDTO = new ArrayList<>(appliedMap.values()).get(listIndex)[1];
 
 		ArrayList<Integer> wishInfoIdList = new ArrayList<>(appliedMap.keySet());
 
@@ -163,6 +165,14 @@ public class ConfirmTradingAction extends ActionSupport implements SessionAware 
 		this.myCommodityDTO = myCommodityDTO;
 	}
 
+
+	public CommodityDTO getYourCommodityDTO() {
+		return yourCommodityDTO;
+	}
+
+	public void setYourCommodityDTO(CommodityDTO yourCommodityDTO) {
+		this.yourCommodityDTO = yourCommodityDTO;
+	}
 
 	public int getYourId() {
 		return yourId;

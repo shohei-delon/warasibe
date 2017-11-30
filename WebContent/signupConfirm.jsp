@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8>
-<title>Insert title here</title>
+	<meta charset=UTF-8>
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/login_auth.css" >
 </head>
 <body>
 	<header>
@@ -27,31 +29,27 @@
 
 
 	<div id="main">
-		<s:form action="SignupConfirmAction" theme="simple">
-			<table>
-				<tr>
-					<td colspan="2">登録情報の確認</td>
-				<tr>
-				<tr>
-					<td>ログインID</td>
-					<td><s:property value="signupUserId" escape="false" /></td>
-				</tr>
-				<tr>
-					<td>パスワード</td>
-					<td><s:property value="signupPassword" escape="false" /></td>
-				</tr>
-				<tr>
-					<td>ユーザーネーム</td>
-					<td><s:property value="nickname" escape="false" /></td>
-				</tr>
-				<tr>
-					<td>メールアドレス</td>
-					<td><s:property value="mail" escape="false" /></td>
-				</tr>
-				<tr>
-					<td><s:submit value="確認" /></td>
-				</tr>
-			</table>
+		<s:form theme="simple">
+			<h1>登録情報の確認</h1>
+
+			<label>ログインID
+				<input disabled type="text" name="signupUserId" value="<s:property value="signupUserId" escape="false" />" >
+			</label>
+
+			<label>パスワード
+				<input disabled type="text" name="signupPassword" value="<s:property value="signupPassword" escape="false" />" >
+			</label>
+
+			<label>ユーザーネーム
+				<input disabled type="text" name="nickname" value="<s:property value="nickname" escape="false" />" >
+			</label>
+
+			<label>メールアドレス
+				<input disabled type="text" name="mail" value="<s:property value="mail" escape="false" />" >
+			</label>
+
+			<s:submit action="SignupConfirmAction" value="確認" />
+			<s:submit action="BackSignupAction" value="戻る" />
 		</s:form>
 	</div>
 

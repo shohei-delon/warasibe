@@ -7,7 +7,7 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/login_authentification.css" >
+	<link rel="stylesheet" href="./css/login_auth.css" >
 </head>
 <body>
 	<header>
@@ -15,9 +15,9 @@
 			<img alt="warasibe" src="./images/logo.png" class="icon">
 		</a>
 
-		<div class="headerRightContainer">
-            <a href="./signup.jsp" class="signup" >新規登録</a>
-		</div>
+		<ul class="headerRightList">
+            <li class="headerRightItem"><a href="./signup.jsp">新規登録</a></li>
+		</ul>
 	</header>
 
 	<div id="main">

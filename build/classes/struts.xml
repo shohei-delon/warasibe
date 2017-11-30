@@ -9,12 +9,16 @@
 
 		<action name="SignupAction" class="com.internousdev.Warasibe.action.SignupAction" method="execute">
 			<result name="success">signupConfirm.jsp</result>
-			<result name="error">signup.jsp</result>
+			<result type="chain" name="error">BackSignupAction</result>
 		</action>
 
 		<action name="SignupConfirmAction" class="com.internousdev.Warasibe.action.SignupConfirmAction" method="execute">
 			<result type="chain" name="success">IndexAction</result>
 			<result name="error">error.jsp</result>
+		</action>
+
+		<action name="BackSignupAction" class="com.internousdev.Warasibe.action.BackSignupAction" method="execute">
+			<result name="success">signup.jsp</result>
 		</action>
 
 		<action name="LoginAction" class="com.internousdev.Warasibe.action.LoginAction" method="execute">

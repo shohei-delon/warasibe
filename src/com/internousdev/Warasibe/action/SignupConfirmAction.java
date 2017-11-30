@@ -13,22 +13,23 @@ public class SignupConfirmAction extends ActionSupport implements SessionAware {
 
 	private Map<String, Object> session;
 
-	private SignupDAO signupDAO = new SignupDAO();
-	private AccountDTO accountDTO = new AccountDTO();
-
-	private String result = ERROR;
-
 	public String execute(){
+		SignupDAO signupDAO = new SignupDAO();
+		AccountDTO accountDTO = new AccountDTO();
 		accountDTO = (AccountDTO) session.get("accountDTO");
 		try {
 			int id = signupDAO.userCreate(accountDTO);
 			session.put("id",id);
-			result = SUCCESS;
+			return SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return ERROR;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
 	}
 
 	@Override
