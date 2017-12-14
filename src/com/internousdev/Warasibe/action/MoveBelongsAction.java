@@ -18,8 +18,8 @@ public class MoveBelongsAction extends ActionSupport implements SessionAware {
 	private BelongsDAO belongsDAO = new BelongsDAO();
 	private CategoryDAO categoryDAO = new CategoryDAO();
 
-	public ArrayList<CommodityDTO> belongsList;
-	public Map<Integer, String> categoryMap;
+	private ArrayList<CommodityDTO> belongsList;
+	private Map<Integer, String> categoryMap;
 
 	private String result = ERROR;
 
@@ -36,6 +36,26 @@ public class MoveBelongsAction extends ActionSupport implements SessionAware {
 		}
 
 		return result;
+	}
+
+	public ArrayList<CommodityDTO> getBelongsList() {
+		return belongsList;
+	}
+
+	public void setBelongsList(ArrayList<CommodityDTO> belongsList) {
+		this.belongsList = belongsList;
+	}
+
+	public Map<Integer, String> getCategoryMap() {
+		return categoryMap;
+	}
+
+	public void setCategoryMap(Map<Integer, String> categoryMap) {
+		this.categoryMap = categoryMap;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
 	}
 
 	@Override

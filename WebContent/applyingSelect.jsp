@@ -7,7 +7,7 @@
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="./css/common.css" >
-	<link rel="stylesheet" href="./css/applying.css" >
+	<link rel="stylesheet" href="./css/applyingSelect.css" >
 </head>
 <body>
 	<header>
@@ -35,7 +35,7 @@
 
 	<div id="main">
 
-		<div>
+		<div class="targetContainer">
 			<p class="appliedItemName"><s:property value="commodityDTO.getName()" /></p>
 			<p class="appliedItemCategory"><s:property value="commodityDTO.getCategory()" /></p>
 			<p class="appliedItemDetail">詳細：<br><s:property value="commodityDTO.getDetail()" /></p>
@@ -61,7 +61,9 @@
 						<s:property value="getDepth()" />
 						<s:property value="getSize_unit()" />
 					</p>
-					<a href="<s:url action="ConfirmApplyingAction"><s:param name="belongsId" value="#list.index"/></s:url>">選択</a>
+					<div class="submitWrapper">
+						<a href="<s:url action="ConfirmApplyingAction"><s:param name="belongsId" value="#list.index"/></s:url>">選択</a>
+					</div>
 				</li>
 			</s:iterator>
 		</ul>

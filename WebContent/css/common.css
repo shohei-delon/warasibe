@@ -25,7 +25,7 @@ header .searchContainer{
 header .searchContainer .searchText{
 	display: inline-block;
 	height: 25px;
-	width: 90%;
+	min-width: 220px;
 	border: none;
 	outline: none;
 	background-color: whitesmoke;
@@ -35,6 +35,10 @@ header .searchContainer .textSearchSubmit{
 	background: url("../images/search.png") 100% 100% no-repeat;
 	background-size: contain;
 	border: none;
+	width: 20px;
+	margin: 0;
+	padding: 5px;
+	margin: 2px;
 }
 
 header .headerRightList{

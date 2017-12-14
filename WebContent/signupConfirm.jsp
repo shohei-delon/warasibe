@@ -29,7 +29,7 @@
 
 
 	<div id="main">
-		<s:form theme="simple">
+		<s:form action="SignupConfirmAction" theme="simple">
 			<h1>登録情報の確認</h1>
 
 			<label>ログインID
@@ -48,8 +48,7 @@
 				<input disabled type="text" name="mail" value="<s:property value="mail" escape="false" />" >
 			</label>
 
-			<s:submit action="SignupConfirmAction" value="確認" />
-			<s:submit action="BackSignupAction" value="戻る" />
+			<s:submit value="確認" />
 		</s:form>
 	</div>
 
