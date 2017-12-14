@@ -37,17 +37,21 @@
 		<ul class="belongsList">
 			<s:iterator value="belongsList">
 				<li class="belongsItem">
-					<p class="belongsItemName"><s:property value="getName()" /></p>
-					<p class="belongsItemCategory"><s:property value="getCategory()" /></p>
+					<div class="topContainer">
+						<p class="belongsItemName"><s:property value="getName()" /></p>
+						<p class="belongsItemCategory"><s:property value="getCategory()" /></p>
+					</div>
 					<p class="belongsItemDetail">詳細：<br><s:property value="getDetail()" /></p>
-					<p class="belongsItemColor"><s:property value="getColor()"/>色</p>
-					<p class="belongsItemSize">
-						<s:property value="getHeight()" />×
-						<s:property value="getWidth()" />×
-						<s:property value="getDepth()" />
-						<s:property value="getSize_unit()" />
-					</p>
-					<a href="<s:url action='RemoveBelongsAction'><s:param name='itemId' value='getId()'/></s:url>">削除</a>
+					<div class="bottomContainer">
+						<p class="belongsItemColor"><s:property value="getColor()"/>色</p>
+						<p class="belongsItemSize">
+							<s:property value="getHeight()" />×
+							<s:property value="getWidth()" />×
+							<s:property value="getDepth()" />
+							<s:property value="getSize_unit()" />
+						</p>
+						<a href="<s:url action='RemoveBelongsAction'><s:param name='itemId' value='getId()'/></s:url>">削除</a>
+					</div>
 				</li>
 			</s:iterator>
 		</ul>

@@ -2,8 +2,10 @@
 
 #main{
 	margin-top: 50px;
+	padding: 0 100px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: flex-start;
 }
 
 #main .belongsList{
@@ -13,58 +15,50 @@
 }
 
 #main .belongsList .belongsItem{
-	position: relative;
 	width: 500px;
-	height: 300px;
 	margin-top: 40px;
 	padding: 20px;
 	background-color: rgba(200,200,200,0.5);
 	font-size: 18px;
 }
 
+#main .belongsList .belongsItem .topContainer{
+	display: flex;
+	justify-content: space-between;
+}
+
 #main .belongsList .belongsItem .belongsItemName{
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	width: 300px;
 	height: 30px;
 	margin: 0;
-	font-size: 35px;
+	font-size: 30px;
 }
 
 #main .belongsList .belongsItem .belongsItemCategory{
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	width: 100px;
+	width: 50px;
 	height: 30px;
 	margin: 0;
 }
 
 #main .belongsList .belongsItem .belongsItemDetail{
-	position: absolute;
-	top: 70px;
 	width: 500px;
 }
 
+#main .belongsList .belongsItem .bottomContainer{
+	display: flex;
+}
+
 #main .belongsList .belongsItem .belongsItemColor{
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
 }
 
 #main .belongsList .belongsItem .belongsItemSize{
-	position: absolute;
-	bottom: 20px;
-	left: 80px;
 }
 
 #main .belongsList .belongsItem a{
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
 	display: block;
+	margin-left: auto;
 	padding: 10px 20px;
+	line-height: 30px;
+	font-size: 30px;
 	background-color: rgba(180,180,180,0.5);
 	color: #333;
 	text-decoration: none;
@@ -81,6 +75,7 @@
 	margin-left: 200px;
 	padding: 30px;
 	border: 1px solid #333;
+	height:
 }
 
 #main .addBelongs label{
