@@ -19,6 +19,11 @@
 	background-color: lightgray;
 }
 
+#leftBar .categoryList .categoryListItem a{
+	display: block;
+	width: 100%;
+}
+
 #centerBar{
 	width: 800px;
 	margin: 0 50px;

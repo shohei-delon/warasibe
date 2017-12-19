@@ -26,7 +26,7 @@
 		<div class="loginContainer">
 			<s:form action="LoginAction" theme="simple">
 				<label for="loginUserId">ログインID
-					<input type="text" name="loginUserId" id="loginUserId">
+					<input type="text" name="loginUserId" id="loginUserId" autofocus>
 				</label>
 				<label for="loginPassword">パスワード
 					<input type="password" name="loginPassword" id="loginPassword">

@@ -14,7 +14,7 @@ public class SearchDAO {
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connector = dbConnector.getConnection();
 
-	public ArrayList<CommodityDTO> searchItem(String text) throws SQLException{
+	public ArrayList<CommodityDTO> searchItem(String text, int userId) throws SQLException{
 		ArrayList<CommodityDTO> list = new ArrayList<>();
 
 		String sql = ""
@@ -30,6 +30,9 @@ public class SearchDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
+			if(resultSet.getInt("sell_user_id") == userId){
+				continue;
+			}
 			CommodityDTO dto = new CommodityDTO();
 			dto.setId(resultSet.getInt("commodity.id"));
 			dto.setPostId(resultSet.getInt("sell_user_id"));
@@ -49,7 +52,7 @@ public class SearchDAO {
 		return list;
 	}
 
-	public ArrayList<CommodityDTO> searchItem(int category) throws SQLException{
+	public ArrayList<CommodityDTO> searchItem(int category, int userId) throws SQLException{
 		ArrayList<CommodityDTO> list = new ArrayList<>();
 
 		String sql = ""
@@ -64,6 +67,9 @@ public class SearchDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
+			if(resultSet.getInt("sell_user_id") == userId){
+				continue;
+			}
 			CommodityDTO dto = new CommodityDTO();
 			dto.setId(resultSet.getInt("commodity.id"));
 			dto.setPostId(resultSet.getInt("sell_user_id"));
@@ -83,7 +89,7 @@ public class SearchDAO {
 		return list;
 	}
 
-	public ArrayList<CommodityDTO> searchItem(String text, int category) throws SQLException{
+	public ArrayList<CommodityDTO> searchItem(String text, int category, int userId) throws SQLException{
 		ArrayList<CommodityDTO> list = new ArrayList<>();
 
 		String sql = ""
@@ -102,6 +108,9 @@ public class SearchDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
+			if(resultSet.getInt("sell_user_id") == userId){
+				continue;
+			}
 			CommodityDTO dto = new CommodityDTO();
 			dto.setId(resultSet.getInt("commodity.id"));
 			dto.setPostId(resultSet.getInt("sell_user_id"));
@@ -122,7 +131,7 @@ public class SearchDAO {
 
 	}
 
-	public ArrayList<CommodityDTO> searchItem() throws SQLException{
+	public ArrayList<CommodityDTO> searchItem(int userId) throws SQLException{
 		ArrayList<CommodityDTO> list = new ArrayList<>();
 
 		String sql = ""
@@ -136,6 +145,9 @@ public class SearchDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
+			if(resultSet.getInt("sell_user_id") == userId){
+				continue;
+			}
 			CommodityDTO dto = new CommodityDTO();
 			dto.setId(resultSet.getInt("commodity.id"));
 			dto.setPostId(resultSet.getInt("sell_user_id"));

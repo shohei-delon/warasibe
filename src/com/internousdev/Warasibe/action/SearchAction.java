@@ -16,6 +16,7 @@ public class SearchAction extends ActionSupport implements SessionAware {
 
 	private String searchText;
 	private int searchCategory;
+	private int userId;
 
 	private ArrayList<CommodityDTO> itemList;
 	private ArrayList<String> categoryList;
@@ -26,18 +27,24 @@ public class SearchAction extends ActionSupport implements SessionAware {
 		SearchDAO searchDAO = new SearchDAO();
 		CategoryDAO categoryDAO = new CategoryDAO();
 
+		if(session.get(SessionName.getId()) != null){
+			userId = (int)session.get(SessionName.getId());
+		}else{
+			result = "login";
+		}
+
 		try {
 			setCategoryList(categoryDAO.getCategoryList());
 
 			if(searchText != null && searchCategory != 0) {
-				setItemList(searchDAO.searchItem(searchText, searchCategory));
+				setItemList(searchDAO.searchItem(searchText, searchCategory, userId));
 			}else if(searchText != null) {
-				setItemList(searchDAO.searchItem(searchText));
+				setItemList(searchDAO.searchItem(searchText, userId));
 			}else if(searchCategory != 0) {
-				setItemList(searchDAO.searchItem(searchCategory));
+				setItemList(searchDAO.searchItem(searchCategory, userId));
 				searchText = "指定無し";
 			}else {
-				setItemList(searchDAO.searchItem());
+				setItemList(searchDAO.searchItem(userId));
 				searchText = "指定無し";
 			}
 
@@ -65,6 +72,14 @@ public class SearchAction extends ActionSupport implements SessionAware {
 
 	public void setSearchCategory(int searchCategory) {
 		this.searchCategory = searchCategory;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public ArrayList<CommodityDTO> getItemList() {

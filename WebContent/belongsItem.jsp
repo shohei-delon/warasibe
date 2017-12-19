@@ -22,15 +22,17 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<s:if test="#session.id != userId">
+					<li class="headerRightItem"><a href='<s:url action="MyPageAction"/>'>マイページ</a></li>
+				</s:if>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -57,19 +59,27 @@
 		</ul>
 		<div class="addBelongs">
 			<s:form action="AddBelongsAction" theme="simple">
-				<label>商品名：<br><input type="text" name="name"/></label><br>
-				<label>商品情報：<br><textarea name="detail" cols="30" rows="5"></textarea></label><br>
-				<label>カテゴリ：<br>
+				<label>商品名：<s:property value="nameError"/><br>
+					<input type="text" name="name" maxlength="10" required/>
+				</label>
+				<label>商品情報：<s:property value="nameError"/><br>
+					<textarea name="detail" rows="5"></textarea>
+				</label>
+				<label>カテゴリ：<s:property value="nameError"/><br>
 					<s:select name="category_id" list="categoryMap"/>
-				</label><br>
-				<label>色：<br><s:select name="color" list="#{'黒':'黒','白':'白','赤':'赤','青':'青','黄':'黄' }"/></label><br>
+				</label>
+				<label>色：<br>
+					<input type="text" name="color" maxlength="5">
+				</label>
 				<label>サイズ：<br>
-					<input type="number" name="height"/>×
-					<input type="number" name="width"/>×
-					<input type="number" name="depth"/>
+					<input type="number" name="height" min="0" max="9999" required/>×
+					<input type="number" name="width" min="0" max="9999" required/>×
+					<input type="number" name="depth" min="0" max="9999" required/>
 					<s:select name="size_unit" list="#{'mm':'mm','cm':'cm','m':'m'}" theme="simple"/>
-				</label><br>
-				<label>使用歴：<br><input type="number" name="age"/>年</label><br>
+				</label>
+				<label>使用歴：<br>
+					<input type="number" name="age" min="0" max="9999"/>年
+				</label>
 				<s:submit value="登録"/>
 			</s:form>
 		</div>

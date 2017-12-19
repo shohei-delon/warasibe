@@ -24,7 +24,6 @@ public class RemoveWishItemAction extends ActionSupport implements SessionAware 
 		if(wishInfoId == 0) wishInfoId = (int) session.get(SessionName.getWishInfoId());
 
 		try {
-			System.out.println(wishInfoId);
 			dao.removeWishItem(wishInfoId);
 			return SUCCESS;
 		} catch (SQLException e) {

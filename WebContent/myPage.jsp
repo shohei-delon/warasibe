@@ -52,7 +52,7 @@
 			<div class="mainRightContainer">
 				<h3>交換取引中</h3>
 				<ul class="topList">
-					<s:if test="agreedMap == null">
+					<s:if test="agreedMap == null || agreedMap.size() == 0">
 						<p>取引中のものはありません。</p>
 					</s:if>
 					<s:iterator value="agreedMap" status="map">
@@ -68,7 +68,7 @@
 				<div class="appliedListContainer">
 					<h3>申し込まれた交換</h3>
 					<ul class="list">
-						<s:if test="appliedMap == null">
+						<s:if test="appliedMap == null || appliedMap.size() == 0">
 							<p>申し込まれた交換はありません。</p>
 						</s:if>
 						<s:iterator value="appliedMap" status="map">
@@ -122,7 +122,7 @@
 				<div class="wishListContainer">
 					<h3>申し込んだ交換</h3>
 					<ul class="list">
-						<s:if test="wishMap == null">
+						<s:if test="wishMap == null || wishMap.size() == 0">
 							<p>申し込んだ交換はありません。</p>
 						</s:if>
 						<s:iterator value="wishMap">

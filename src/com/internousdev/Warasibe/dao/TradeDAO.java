@@ -91,7 +91,6 @@ public class TradeDAO {
 	}
 
 	public void setStatus(int wishInfoId) throws SQLException {
-		System.out.println(wishInfoId);
 		String sql = ""
 			+ "UPDATE trade_status "
 			+ "SET progress = progress + 1 "
@@ -104,7 +103,6 @@ public class TradeDAO {
 	}
 
 	public void addArrived(int wishInfoId, int myUserId) throws SQLException {
-		System.out.println(wishInfoId);
 		String sql = ""
 				+ "INSERT INTO arrived(trade_status_id, arrived_user_id) "
 				+ "SELECT trade_status.id, ? "

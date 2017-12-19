@@ -73,11 +73,9 @@
 								<s:property value="getSize_unit()" />
 							</span>
 						</a>
-						<s:if test="session.id != getPostId()">
-							<div class="center">
-								<a href="<s:url action='ApplyingSelectAction'><s:param name="listIndex" value="#list.index"/></s:url>" class="submit">交換申請</a>
-							</div>
-						</s:if>
+						<div class="center">
+							<a href="<s:url action='ApplyingSelectAction'><s:param name="listIndex" value="#list.index"/></s:url>" class="submit">交換申請</a>
+						</div>
 					</li>
 				</s:iterator>
 			</ul>

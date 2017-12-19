@@ -20,6 +20,7 @@ public class ReviewAction extends ActionSupport implements SessionAware {
 		OtherAccountDAO dao = new OtherAccountDAO();
 		try {
 			dao.setEvaluation(rate, yourId);
+
 			return SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();

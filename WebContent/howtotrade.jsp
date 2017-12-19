@@ -6,6 +6,8 @@
 <head>
 	<meta charset=UTF-8>
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/howtotrade.css" >
 </head>
 <body>
 	<header>
@@ -20,21 +22,23 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<s:if test="#session.id != userId">
+					<li class="headerRightItem"><a href='<s:url action="MyPageAction"/>'>マイページ</a></li>
+				</s:if>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
 		<div class="leftSideBar">
-			<div>
-				<p>配送するもの</p>
+			<p>配送するもの</p>
+			<div class="targetContainer">
 				<p class="appliedItemName"><s:property value="myCommodityDTO.getName()" /></p>
 				<p class="appliedItemCategory"><s:property value="myCommodityDTO.getCategory()" /></p>
 				<p class="appliedItemDetail">詳細：<br><s:property value="myCommodityDTO.getDetail()" /></p>
@@ -47,9 +51,9 @@
 				</p>
 				<address>住所：東京都文京区湯島３丁目２−１２</address>
 			</div>
-			<img alt="↓↑" src="./images/tradeVertical.png">
-			<div>
-				<p>届くもの</p>
+			<img alt="↓↑" src="./images/tradeVertical.png" class="indicator">
+			<p>届くもの</p>
+			<div class="selectContainer">
 				<p class="appliedItemName"><s:property value="yourCommodityDTO.getName()" /></p>
 				<p class="appliedItemCategory"><s:property value="yourCommodityDTO.getCategory()" /></p>
 				<p class="appliedItemDetail">詳細：<br><s:property value="yourCommodityDTO.getDetail()" /></p>

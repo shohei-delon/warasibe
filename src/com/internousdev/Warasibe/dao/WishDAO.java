@@ -221,6 +221,10 @@ public class WishDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		while(resultSet.next()) {
+			if(resultSet.getString("com1.id").equals(resultSet.getString("com2.id"))){
+				continue;
+			}
+
 			int wishInfoId = resultSet.getInt("wish_info.id");
 
 			CommodityDTO myDto = new CommodityDTO();

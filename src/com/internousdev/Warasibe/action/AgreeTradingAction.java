@@ -1,6 +1,8 @@
 package com.internousdev.Warasibe.action;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -16,11 +18,15 @@ public class AgreeTradingAction extends ActionSupport implements SessionAware {
 
 	private String messege;
 	private CommodityDTO myCommodityDTO;
+	private CommodityDTO yourCommodityDTO;
 
 	@Override
 	public String execute(){
 
-		myCommodityDTO = (CommodityDTO) session.get(SessionName.getMyCommodityDto());
+		@SuppressWarnings("unchecked")
+		LinkedHashMap<Integer[], CommodityDTO[]> appliedMap = (LinkedHashMap<Integer[], CommodityDTO[]>) session.get(SessionName.getAppliedCommodityMap());
+		myCommodityDTO = new ArrayList<>(appliedMap.values()).get(0)[0];
+		yourCommodityDTO = new ArrayList<>(appliedMap.values()).get(0)[1];
 
 		int wishInfoId = (int) session.get(SessionName.getWishInfoId());
 		TradeDAO dao = new TradeDAO();
@@ -57,6 +63,14 @@ public class AgreeTradingAction extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public CommodityDTO getYourCommodityDTO() {
+		return yourCommodityDTO;
+	}
+
+	public void setYourCommodityDTO(CommodityDTO yourCommodityDTO) {
+		this.yourCommodityDTO = yourCommodityDTO;
 	}
 
 }

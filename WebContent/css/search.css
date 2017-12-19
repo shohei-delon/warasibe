@@ -19,6 +19,11 @@
 	background-color: lightgray;
 }
 
+#leftBar .categoryList .categoryListItem a{
+	display: block;
+	width: 100%;
+}
+
 .searchList{
 	display: flex;
 	flex-flow: row wrap;

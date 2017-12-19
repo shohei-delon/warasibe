@@ -1,35 +1,39 @@
 @CHARSET "UTF-8";
 
+
 #main{
 	margin-top: 100px;
-	display: flex;
-	justify-content: space-between;
-	align-items: left;
-}
-.targetContainer{
-	margin: 0 150px;
-	min-width: 300px;
-	background-color: white;
-	border: 1px solid #ff7f7f;
-	border-radius: 20px;
-	padding: 20px;
-}
-
-.belongsList{
-}
-
-.belongsList .belongsItem{
-	width: 300px;
-	background-color: white;
-	padding: 20px;
-	margin: 30px;
-}
-
-.belongsList .belongsItem .submitWrapper{
 	text-align: center;
 }
 
-.submitWrapper a{
+.reviewList{
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
+}
+
+input{
+	display: none;
+}
+
+.reviewList label{
+	padding: 20px 50px;
+	width: 100px;
+	cursor: pointer;
+	background-color: darkseagreen;
+}
+
+.reviewList input[type="radio"]:checked + label{
+	background-color: goldenrod;
+}
+
+
+.submitContainer{
+	margin-top: 100px;
+	text-align: center;
+}
+
+.submitContainer label{
 	display: inline-block;
 	position: relative;
 	padding: 0.5em 1em;
@@ -38,12 +42,12 @@
 	transition: .4s;
 }
 
-.submitWrapper a:hover{
+.submitContainer > label:hover{
 	padding: 0.5em 2em;
     color:#ff7f7f;
 }
 
-.submitWrapper a:before,a:after{
+.submitContainer > label:before,label:after{
 	position: absolute;
 	top: 0;
 	content:'';
@@ -52,14 +56,14 @@
 	display: inline-block;
 }
 
-.submitWrapper a:before{
+.submitContainer > label:before{
 	border-left: solid 1px #ff7f7f;
 	border-top: solid 1px #ff7f7f;
 	border-bottom: solid 1px #ff7f7f;
 	left: 0;
 }
 
-.submitWrapper a:after{
+.submitContainer > label:after{
 	border-top: solid 1px #ff7f7f;
 	border-right: solid 1px #ff7f7f;
 	border-bottom: solid 1px #ff7f7f;

@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8>
-<title>Insert title here</title>
+	<meta charset=UTF-8>
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="./css/common.css" >
+	<link rel="stylesheet" href="./css/edit.css" >
 </head>
 <body>
 
@@ -21,15 +23,17 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"><s:param name="userId" value="#session.id" /></s:url>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<s:if test="#session.id != userId">
+					<li class="headerRightItem"><a href='<s:url action="MyPageAction"/>'>マイページ</a></li>
+				</s:if>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -37,14 +41,18 @@
 		<p><s:property value="message"/></p>
 
 		<s:form action="EditLoginAuthAction" theme="simple">
-			<label for="oldId">古いログインID</label>
-			<input type="text" name="oldId" id="oldId">
-			<label for="oldPassword">古いパスワード</label>
-			<input type="password" name="oldPassword" id="oldPassword">
-			<label for="newId">新しいログインID</label>
-			<input type="text" name="newId" id="newId">
-			<label for="newPassword">新しいパスワード</label>
-			<input type="password" name="newPassword" id="newPassword">
+			<label for="oldId">古いログインID<br>
+				<input type="text" name="oldId" id="oldId">
+			</label>
+			<label for="oldPassword">古いパスワード<br>
+				<input type="password" name="oldPassword" id="oldPassword">
+			</label>
+			<label for="newId">新しいログインID<br>
+				<input type="text" name="newId" id="newId">
+			</label>
+			<label for="newPassword">新しいパスワード<br>
+				<input type="password" name="newPassword" id="newPassword">
+			</label>
 			<s:submit value="更新"/>
 		</s:form>
 	</div>

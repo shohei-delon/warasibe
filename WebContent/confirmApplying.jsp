@@ -22,15 +22,17 @@
 			</s:form>
 		</div>
 
-		<div class="headerRightContainer">
+		<ul class="headerRightList">
 			<s:if test="#session.id == null">
 				<jsp:forward page="login.jsp"/>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="MyPageAction"/>'>マイページ</a>
-				<a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+				<s:if test="#session.id != userId">
+					<li class="headerRightItem"><a href='<s:url action="MyPageAction"/>'>マイページ</a></li>
+				</s:if>
+				<li class="headerRightItem"><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 			</s:else>
-		</div>
+		</ul>
 	</header>
 
 	<div id="main">
@@ -48,7 +50,12 @@
 					<s:property value="myCommodityDTO.getSize_unit()" />
 				</p>
 			</div>
-			<img alt="←　→" src="./images/trade.png" class="indicator">
+			<div class="indicatorWrapper">
+				<img alt="←　→" src="./images/trade.png" class="indicator">
+				<div class="submitWrapper">
+					<a href="<s:url action="AddWishItemAction" ><s:param name="userId" value="#session.id" /></s:url>">決定</a>
+				</div>
+			</div>
 			<div class="selectContainer">
 				<p class="appliedItemName"><s:property value="wantCommodityDTO.getName()" /></p>
 				<p class="appliedItemCategory"><s:property value="wantCommodityDTO.getCategory()" /></p>
@@ -62,11 +69,6 @@
 				</p>
 			</div>
 		</div>
-		<div class="submitWrapper">
-			<a href="<s:url action="AddWishItemAction" ><s:param name="userId" value="#session.id" /></s:url>">決定</a>
-		</div>
-
 	</div>
-
 </body>
 </html>
