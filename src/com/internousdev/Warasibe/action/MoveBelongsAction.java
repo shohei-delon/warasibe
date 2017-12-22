@@ -21,21 +21,19 @@ public class MoveBelongsAction extends ActionSupport implements SessionAware {
 	private ArrayList<CommodityDTO> belongsList;
 	private Map<Integer, String> categoryMap;
 
-	private String result = ERROR;
-
 	public String execute(){
 
 		try {
 			belongsList = belongsDAO.getBelongsItem(Integer.parseInt(session.get("id").toString()));
 			categoryMap = categoryDAO.getCategoryMap();
-			result = SUCCESS;
+			return SUCCESS;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return ERROR;
 	}
 
 	public ArrayList<CommodityDTO> getBelongsList() {

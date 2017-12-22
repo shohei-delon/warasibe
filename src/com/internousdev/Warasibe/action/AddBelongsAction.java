@@ -27,7 +27,6 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 	private String size_unit;
 	private Date postdate;
 	private int user_id;
-	private String result = ERROR;
 
 	public String execute(){
 
@@ -47,12 +46,12 @@ public class AddBelongsAction extends ActionSupport implements SessionAware {
 
 		try {
 			dao.addBelongsItem(dto);
-			result = SUCCESS;
+			return SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return ERROR;
 	}
 
 	public String getName() {

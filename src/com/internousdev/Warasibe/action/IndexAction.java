@@ -30,12 +30,12 @@ public class IndexAction extends ActionSupport implements SessionAware {
 			categoryList = indexDao.getCategoryList();
 			firstTopicList = firstTopicAccountDAO.getAccountTradeCount();
 			secondTopicList = secondTopicAccountDAO.getAccountEvaluation();
-			result = SUCCESS;
+			return SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return ERROR;
 	}
 
 	@Override

@@ -15,18 +15,16 @@ public class RemoveBelongsAction extends ActionSupport implements SessionAware {
 
 	private BelongsDAO dao = new BelongsDAO();
 
-	private String result = ERROR;
-
 	public String execute() {
 
 		try {
 			dao.removeBelongsItem(itemId);
-			result = SUCCESS;
+			return SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return ERROR;
 	}
 
 	public int getItemId() {

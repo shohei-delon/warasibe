@@ -17,7 +17,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	private AccountDTO accountDTO = new AccountDTO();
 
 	public Map<String, Object> session;
-	private String result = ERROR;
 
 	public String execute(){
 		if(!(loginUserId.equals("") || loginPassword.equals(""))){
@@ -27,10 +26,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
 			session.put("accountDTO", accountDTO);
 			if(((AccountDTO) session.get("accountDTO")).isLogin()){
 				session.put("id", accountDTO.getId());
-				result = LOGIN;
+				return LOGIN;
 			}
 		}
-		return result;
+		return ERROR;
 	}
 
 	public String getLoginUserId() {
