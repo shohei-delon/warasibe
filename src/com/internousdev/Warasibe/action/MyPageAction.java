@@ -153,4 +153,9 @@ public class MyPageAction extends ActionSupport implements SessionAware {
 		this.session = session;
 	}
 
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
 }

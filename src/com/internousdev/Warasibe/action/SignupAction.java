@@ -85,4 +85,16 @@ public class SignupAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session){
 		this.session = session;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
 }
