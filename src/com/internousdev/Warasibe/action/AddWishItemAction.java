@@ -16,8 +16,6 @@ public class AddWishItemAction extends ActionSupport implements SessionAware {
 
 	private Map<String, Object> session;
 
-	//TODO CompleteApplyingActionに名前変更
-
 	public String execute() {
 		String result = ERROR;
 

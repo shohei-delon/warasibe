@@ -11,8 +11,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ConfirmApplyingAction extends ActionSupport implements SessionAware {
 
-	//TODO ApplyingConfirmActionに名前変更
-
 	private int belongsId;
 
 	private CommodityDTO myCommodityDTO;
@@ -21,7 +19,6 @@ public class ConfirmApplyingAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 
 	public String execute() {
-		//TODO ここまでやった
 
 		@SuppressWarnings("unchecked")
 		ArrayList<CommodityDTO> list = (ArrayList<CommodityDTO>) session.get(SessionName.getBelongsCommodityList());
